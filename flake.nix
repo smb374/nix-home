@@ -11,9 +11,13 @@
     decl-cachix.url =
       "github:jonascarpay/declarative-cachix/800c308a85b964eb3447a3cb07e8190fb74dcf59";
     devenv.url = "https://install.devenv.sh/latest";
+    ags = {
+      url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, decl-cachix, devenv, ... }:
+  outputs = { nixpkgs, home-manager, decl-cachix, devenv, ags, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -27,6 +31,7 @@
           # Specify your home configuration modules here, for example,
           # the path to your home.nix.
           modules = [
+            ags.homeManagerModules.default
             decl-cachix.homeManagerModules.declarative-cachix
             ./home.nix
             { home.packages = [ devenv' ]; }

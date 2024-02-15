@@ -20,7 +20,8 @@ in {
         "SCRIPT_ROOT,${hyprlandRoot}/scripts"
         "EWW_ROOT,${hyprlandRoot}/eww"
         "WAYBAR_ROOT,${hyprlandRoot}/waybar"
-        "AGS_ROOT,${hyprlandRoot}/ags"
+        # NOTE: use home-manager to manage
+        # "AGS_ROOT,${hyprlandRoot}/ags"
         "ROFI_ROOT,${hyprlandRoot}/rofi"
         "WLR_NO_HARDWARE_CURSORS,1"
       ];

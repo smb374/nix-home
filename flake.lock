@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "ags": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1707999781,
+        "narHash": "sha256-M3/0jO3jPN3Bws7U/EHBatAYfSBhHgtpy81bnjTt8e4=",
+        "owner": "Aylur",
+        "repo": "ags",
+        "rev": "0cf40494340a92354343b9b40f8d693e19dbfd3e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Aylur",
+        "repo": "ags",
+        "type": "github"
+      }
+    },
     "decl-cachix": {
       "locked": {
         "lastModified": 1698062126,
@@ -241,6 +261,7 @@
     },
     "root": {
       "inputs": {
+        "ags": "ags",
         "decl-cachix": "decl-cachix",
         "devenv": "devenv",
         "home-manager": "home-manager",
