@@ -1,8 +1,9 @@
-{ ... }:
+{ config, ... }:
 let
   # NOTE: Check monitor name.
   monitor = "eDP-1";
-  hyprlandRoot = "$HOME/.config/hypr";
+  home = config.home.homeDirectory;
+  hyprlandRoot = "${home}/.config/hypr";
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -87,17 +88,23 @@ in {
         # Main keys
         "$mainMod, RETURN, exec, foot"
         "$mainMod SHIFT, RETURN, exec, foot -a float-term"
-        "$mainMod ALT, M, exec, foot -a music -o colors.alpha=1.0 ncmpcpp"
+
+        # TODO: MPD
+        # "$mainMod ALT, M, exec, foot -a music -o colors.alpha=1.0 ncmpcpp"
+
         "$mainMod SHIFT, Q, killactive"
-        "$mainMod SHIFT, X, exec, $SCRIPT_ROOT/rofi-powermenu"
         "$mainMod SHIFT, F, togglefloating"
         "$mainMod, F, fullscreen, 0"
-        "$mainMod, D, exec, $SCRIPT_ROOT/rofi-launcher drun"
-        "$mainMod, R, exec, $SCRIPT_ROOT/rofi-launcher run"
-        "$mainMod, W, exec, $SCRIPT_ROOT/rofi-launcher window"
-        "$mainMod, V, exec, $SCRIPT_ROOT/rofi-clipboard"
-        "$mainMod, P, pseudo"
-        "$mainMod, J, togglesplit"
+
+        # TODO: rofi
+        # "$mainMod SHIFT, X, exec, $SCRIPT_ROOT/rofi-powermenu"
+        # "$mainMod, D, exec, $SCRIPT_ROOT/rofi-launcher drun"
+        # "$mainMod, R, exec, $SCRIPT_ROOT/rofi-launcher run"
+        # "$mainMod, W, exec, $SCRIPT_ROOT/rofi-launcher window"
+        # "$mainMod, V, exec, $SCRIPT_ROOT/rofi-clipboard"
+        # "$mainMod, P, pseudo"
+        # "$mainMod, J, togglesplit"
+
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
@@ -126,22 +133,27 @@ in {
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
+
+        # TODO: scripts
         # screenshot
-        ", PRINT, exec, $SCRIPT_ROOT/screenshot"
-        "CTRL, PRINT, exec, $SCRIPT_ROOT/screenshot select"
+        # ", PRINT, exec, $SCRIPT_ROOT/screenshot"
+        # "CTRL, PRINT, exec, $SCRIPT_ROOT/screenshot select"
+
+        # TODO: MPD
         # mpc
-        "$mainMod, SPACE, exec, mpc toggle"
+        # "$mainMod, SPACE, exec, mpc toggle"
+
         # Media keys
-        ''
-          , XF86MonBrightnessUp, exec, light -A 10; eww -c "$EWW_ROOT" update current-brightness="$(light -G)"''
-        ''
-          , XF86MonBrightnessDown, exec, light -U 10; eww -c "$EWW_ROOT" update current-brightness="$(light -G)"''
+        ", XF86MonBrightnessUp, exec, light -A 10"
+        ", XF86MonBrightnessDown, exec, light -U 10"
         ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-"
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioPlay, exec, mpc -q toggle"
-        ", XF86AudioPrev, exec, mpc -q prev"
-        ", XF86AudioNext, exec, mpc -q next"
+
+        # TODO: MPD
+        # ", XF86AudioPlay, exec, mpc -q toggle"
+        # ", XF86AudioPrev, exec, mpc -q prev"
+        # ", XF86AudioNext, exec, mpc -q next"
       ];
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging

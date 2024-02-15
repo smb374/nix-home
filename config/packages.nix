@@ -31,6 +31,7 @@
       gnutar
       gtklock
       hyprpaper
+      light
       nil
       nix-prefetch
       nodejs

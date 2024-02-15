@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./programs.nix.d/fish.nix
+    ./programs.nix.d/foot.nix
     ./programs.nix.d/gpg.nix
     ./programs.nix.d/rofi.nix
     ./programs.nix.d/tmux.nix
