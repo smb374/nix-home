@@ -19,6 +19,8 @@
       # (pkgs.writeShellScriptBin "my-hello" ''
       #   echo "Hello, ${config.home.username}!"
       # '')
+      brightnessctl
+      bun
       cachix
       (catppuccin-kvantum.override {
         accent = "Lavender";
@@ -37,6 +39,7 @@
       nodejs
       python3
       unzip
+      sassc
       trash-cli
       tree-sitter
       wl-clipboard
