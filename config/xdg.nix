@@ -7,6 +7,9 @@ let
     style = "kvantum-dark";
   };
 in {
+  imports = [
+    ./xdg.nix.d/hyprland.nix
+  ];
   xdg = {
     enable = true;
     configFile = {

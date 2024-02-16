@@ -18,17 +18,17 @@ in {
       env = [
         "HYPRLAND_ROOT,${hyprlandRoot}"
         "SCRIPT_ROOT,${hyprlandRoot}/scripts"
-        "EWW_ROOT,${hyprlandRoot}/eww"
-        "WAYBAR_ROOT,${hyprlandRoot}/waybar"
-        # NOTE: use home-manager to manage
-        # "AGS_ROOT,${hyprlandRoot}/ags"
+        "AGS_ROOT,${hyprlandRoot}/ags"
         "ROFI_ROOT,${hyprlandRoot}/rofi"
         "WLR_NO_HARDWARE_CURSORS,1"
       ];
       exec-once = [
         "hyprpaper"
+        "fcitx5"
+        "dunst"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
+        "ags -c $AGS_ROOT/config.js"
       ];
       exec = [ ];
       input = {
@@ -98,13 +98,13 @@ in {
         "$mainMod, F, fullscreen, 0"
 
         # TODO: rofi
-        # "$mainMod SHIFT, X, exec, $SCRIPT_ROOT/rofi-powermenu"
-        # "$mainMod, D, exec, $SCRIPT_ROOT/rofi-launcher drun"
-        # "$mainMod, R, exec, $SCRIPT_ROOT/rofi-launcher run"
-        # "$mainMod, W, exec, $SCRIPT_ROOT/rofi-launcher window"
-        # "$mainMod, V, exec, $SCRIPT_ROOT/rofi-clipboard"
-        # "$mainMod, P, pseudo"
-        # "$mainMod, J, togglesplit"
+        "$mainMod SHIFT, X, exec, $SCRIPT_ROOT/rofi-powermenu"
+        "$mainMod, D, exec, $SCRIPT_ROOT/rofi-launcher drun"
+        "$mainMod, R, exec, $SCRIPT_ROOT/rofi-launcher run"
+        "$mainMod, W, exec, $SCRIPT_ROOT/rofi-launcher window"
+        "$mainMod, V, exec, $SCRIPT_ROOT/rofi-clipboard"
+        "$mainMod, P, pseudo"
+        "$mainMod, J, togglesplit"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"

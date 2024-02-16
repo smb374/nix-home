@@ -40,8 +40,10 @@
       python3
       unzip
       sassc
+      slurp
       trash-cli
       tree-sitter
+      wayshot
       wl-clipboard
       zig
     ] ++ [

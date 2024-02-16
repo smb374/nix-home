@@ -12,6 +12,5 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    # ".config/fish/themes/Catppuccin Mocha.theme".source = ./sources/fish/catppuccin_mocha.theme;
   };
 }
