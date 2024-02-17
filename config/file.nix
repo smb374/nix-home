@@ -12,5 +12,6 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".editorconfig".source = ./sources/editorconfig;
   };
 }

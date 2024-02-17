@@ -8,7 +8,8 @@ let
   };
 in {
   imports = [
-    ./xdg.nix.d/hyprland.nix
+    ./xdg.nix.d/configfiles/hyprland.nix
+    ./xdg.nix.d/portal.nix
   ];
   xdg = {
     enable = true;

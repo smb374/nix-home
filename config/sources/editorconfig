@@ -1,0 +1,80 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.go]
+indent_style = tab
+
+[*.{ex,exs}]
+indent_style = space
+indent_size = 2
+
+[*.{ml,mli}]
+indent_style = space
+indent_size = 2
+
+[*.hs]
+indent_style = space
+indent_size = 4
+
+[*.cabal]
+indent_style = space
+indent_size = 2
+
+[*.{c,h,cpp,hpp,cc,l,y}]
+indent_style = space
+indent_size = 4
+
+[*.{org,yml,yaml,json}]
+indent_style = space
+indent_size = 2
+
+[*.{js,ts,el,emacs}]
+indent_style = space
+indent_size = 2
+
+[*.{html,xml,css,scss,svelte}]
+indent_style = space
+indent_size = 4
+
+[*.{lua,fnl}]
+indent_style = space
+indent_size = 2
+
+[*.rb]
+indent_style = space
+indent_size = 2
+
+[Makefile]
+indent_style = tab
+indent_size = 4
+
+[meson.build]
+indent_style = space
+indent_size = 2
+
+[*.yuck]
+indent_style = space
+indent_size = 2
+
+[*.md]
+indent_style = space
+indent_size = 2
+
+[*.proto]
+indent_style = space
+indent_size = 2
+
+[*.typ]
+indent_style = space
+indent_size = 2
+
+[*.nix]
+indent_style = space
+indent_size = 2
