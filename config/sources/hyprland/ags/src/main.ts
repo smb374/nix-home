@@ -48,7 +48,7 @@ const Bar = (monitor: number) => Widget.Window({
 })
 
 const scss = App.configDir + "/style/style.scss";
-const css = App.configDir + "/style/style.css";
+const css = "/tmp/ags/style.css";
 
 Utils.exec(`sassc ${scss} ${css}`);
 
