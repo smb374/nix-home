@@ -2,6 +2,8 @@
 
 DEV="${1}"
 
+umount -R /mnt
+
 parted -s -a optimal -- "${DEV}" \
     mklabel gpt \
     mkpart NIXEFI fat32 1MiB 1GiB \
