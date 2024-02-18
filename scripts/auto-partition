@@ -11,6 +11,8 @@ parted -s -a optimal -- "${DEV}" \
 mkfs.vfat -F 32 -n NIXEFI "${DEV}1"
 mkfs.btrfs -L nixos "${DEV}2"
 
+sleep 1
+echo "Finished partitioning."
 mkdir -p /mnt
 
 mount /dev/disk/by-label/nixos /mnt
