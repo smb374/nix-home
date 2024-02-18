@@ -11,25 +11,25 @@ parted -s -a optimal -- "${DEV}" \
 mkfs.vfat -F 32 -n NIXEFI "${DEV}1"
 mkfs.btrfs -L nixos -f "${DEV}2"
 
-sleep 1
 echo "Finished partitioning, wait 1 second..."
+sleep 1
 mkdir -p /mnt
 
-mount /dev/disk/by-label/nixos /mnt
+mount /dev/disk/by-partlabel/nixos /mnt
 btrfs subvolume create /mnt/root
 btrfs subvolume create /mnt/home
 btrfs subvolume create /mnt/nix
 btrfs subvolume create /mnt/swap
 umount /mnt
 
-mount -o compress=zstd,subvol=root /dev/disk/by-label/nixos /mnt
+mount -o compress=zstd,subvol=root /dev/disk/by-partlabel/nixos /mnt
 mkdir -p /mnt/home /mnt/nix /mnt/swap
-mount -o compress=zstd,subvol=home /dev/disk/by-label/nixos /mnt/home
-mount -o compress=zstd,noatime,subvol=nix /dev/disk/by-label/nixos /mnt/nix
-mount -o noatime,subvol=swap /dev/disk/by-label/nixos /mnt/swap
+mount -o compress=zstd,subvol=home /dev/disk/by-partlabel/nixos /mnt/home
+mount -o compress=zstd,noatime,subvol=nix /dev/disk/by-partlabel/nixos /mnt/nix
+mount -o noatime,subvol=swap /dev/disk/by-partlabel/nixos /mnt/swap
 btrfs filesystem mkswapfile --size 4g --uuid clear /mnt/swap/swapfile
 
 mkdir -p /mnt/boot
-mount /dev/disk/by-label/NIXEFI /mnt/boot
+mount /dev/disk/by-partlabel/NIXEFI /mnt/boot
 
 echo "Btrfs volume create finished & mounted. Now start 'nixos-install'."
