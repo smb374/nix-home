@@ -9,7 +9,7 @@ parted -s -a optimal -- "${DEV}" \
     set 1 esp on
 
 mkfs.vfat -F 32 -n NIXEFI "${DEV}1"
-mkfs.btrfs -L nixos "${DEV}2"
+mkfs.btrfs -L nixos -f "${DEV}2"
 
 sleep 1
 echo "Finished partitioning."
