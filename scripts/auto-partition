@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+DEV="${1}"
+
+parted -s -a optimal -- "${DEV}" \
+    mklabel gpt \
+    mkpart NIXEFI fat32 1MiB 1GiB \
+    mkpart nixos btrfs 1GiB 100% \
+    set 1 esp on

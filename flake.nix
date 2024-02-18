@@ -26,9 +26,25 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      pkgs' = nixos.legacyPackages.${system};
       devenv' = devenv.outputs.packages.${system}.default;
     in {
+      programs.${system} = {
+        auto-partition =
+          pkgs'.writeShellScriptBin "auto-partition" (builtins.readFile ./scripts/auto-partition);
+      };
       formatter.${system} = pkgs.nixfmt;
+      homeConfigurations."smb374-nix" =
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ags.homeManagerModules.default
+            decl-cachix.homeManagerModules.declarative-cachix
+            ./home.nix
+            { home.packages = [ devenv' ]; }
+          ];
+          extraSpecialArgs = { };
+        };
       nixosConfigurations."smb374-nix" = nixos.lib.nixosSystem {
         system = system;
         modules = [
@@ -36,22 +52,5 @@
           { programs.nix-ld.package = nix-ld-rs.packages.${system}.nix-ld-rs; }
         ];
       };
-      homeConfigurations."poyehchen" =
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-
-          # Specify your home configuration modules here, for example,
-          # the path to your home.nix.
-          modules = [
-            ags.homeManagerModules.default
-            decl-cachix.homeManagerModules.declarative-cachix
-            ./home.nix
-            { home.packages = [ devenv' ]; }
-          ];
-
-          # Optionally use extraSpecialArgs
-          # to pass through arguments to home.nix
-          extraSpecialArgs = { };
-        };
     };
 }
