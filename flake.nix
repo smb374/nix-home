@@ -33,12 +33,6 @@
         auto-partition =
           pkgs'.writeShellScriptBin "auto-partition" (builtins.readFile ./scripts/auto-partition);
       };
-      # apps.${system} = {
-      #   auto-partition = {
-      #     type = "app";
-      #     program = "${self.packages.${system}.packages.auto-partition}/bin/auto-partition";
-      #   };
-      # };
       formatter.${system} = pkgs.nixfmt;
       homeConfigurations."smb374-nix" =
         home-manager.lib.homeManagerConfiguration {
