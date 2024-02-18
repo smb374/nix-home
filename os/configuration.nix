@@ -2,12 +2,10 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, ... }:
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+{ pkgs, ... }: {
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Enable flakes.
   nix.settings = {
@@ -27,13 +25,12 @@
     kernelPackages = pkgs.linuxPackages_zen;
   };
 
-  console = {
-    keyMap = "us";
-  };
+  console = { keyMap = "us"; };
 
   environment.systemPackages = with pkgs; [
     catppuccin-sddm-corners
     curl
+    greetd.tuigreet
     qogir-icon-theme
     vim
     wget
@@ -63,10 +60,10 @@
       pinentryFlavor = "curses";
     };
     htop.enable = true;
-    # hyprland = {
-    #   enable = true;
-    #   xwayland.enable = true;
-    # };
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
     mtr.enable = true;
     nix-ld = {
       enable = true;
@@ -124,6 +121,14 @@
     polkit.enable = true;
   };
   services = {
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r -c Hyprland";
+        };
+      };
+    };
     openssh.enable = true;
     pipewire = {
       enable = true;
@@ -135,17 +140,6 @@
       pulse.enable = true;
       wireplumber.enable = true;
     };
-    # xserver = {
-    #   enable = true;
-    #   displayManager = {
-    #     sddm = {
-    #       enable = true;
-    #       settings = {
-    #         Theme.CursorTheme = "Qogir-dark";
-    #       };
-    #     };
-    #   };
-    # };
     yubikey-agent.enable = true;
   };
   sound.enable = true;
@@ -155,7 +149,8 @@
   users = {
     users.poyehchen = {
       extraGroups = [ "audio" "video" "wheel" ];
-      hashedPassword = "$y$j9T$YLbNr7cW0qMP8T/0LKDd.1$f81OosH6ml9XqYKa7lAfgViVTybHcj/.dQR2UQTa.v2";
+      hashedPassword =
+        "$y$j9T$YLbNr7cW0qMP8T/0LKDd.1$f81OosH6ml9XqYKa7lAfgViVTybHcj/.dQR2UQTa.v2";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINcjZwi+gFwxNcVnt9i+M+Gyxm0FKGYD3wIn+BEW0pdQ cardno:14_352_902"

@@ -7,10 +7,7 @@ let
     style = "kvantum-dark";
   };
 in {
-  imports = [
-    ./xdg.nix.d/configfiles/hyprland.nix
-    ./xdg.nix.d/portal.nix
-  ];
+  imports = [ ./xdg.nix.d/configfiles/hyprland.nix ./xdg.nix.d/portal.nix ];
   xdg = {
     enable = true;
     configFile = {

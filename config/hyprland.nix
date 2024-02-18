@@ -1,9 +1,16 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   # NOTE: Check monitor name.
   monitor = "eDP-1";
   home = config.home.homeDirectory;
   hyprlandRoot = "${home}/.config/hypr";
+  workspaceKeys = lib.lists.concatMap (i:
+    let x = builtins.toString i;
+    in [
+      "$mainMod, ${x}, workspace, ${x}"
+      "$mainMod SHIFT, ${x}, movetoworkspace, ${x}"
+    ]) (lib.lists.range 1 9);
+  floatRule = type: expr: "float,${type}:${expr}";
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -18,7 +25,7 @@ in {
       env = [
         "HYPRLAND_ROOT,${hyprlandRoot}"
         "SCRIPT_ROOT,${hyprlandRoot}/scripts"
-        "AGS_ROOT,${hyprlandRoot}/ags"
+        "AGS_CONFIG,${hyprlandRoot}/ags/config.js"
         "ROFI_ROOT,${hyprlandRoot}/rofi"
         "WLR_NO_HARDWARE_CURSORS,1"
       ];
@@ -28,7 +35,7 @@ in {
         "dunst"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-        "ags -c $AGS_ROOT/config.js"
+        "ags -c $AGS_CONFIG"
       ];
       exec = [ ];
       input = {
@@ -83,66 +90,44 @@ in {
         key_press_enables_dpms = true;
       };
       xwayland = { force_zero_scaling = true; };
+      windowrulev2 = (builtins.map (x: floatRule "class" x) [
+        "(float-term)"
+        "(music)"
+        "(imv)"
+        "(mpv)"
+      ]) ++ (builtins.map (x: floatRule "title" x) [
+        "(rmpd)"
+        "(rmpc)"
+        "(PyLNP)"
+      ]) ++ [ "size 1000 500,class:(music)" ];
       # Keybindings
       "$mainMod" = "SUPER";
       bind = [
         # Main keys
         "$mainMod, RETURN, exec, foot"
         "$mainMod SHIFT, RETURN, exec, foot -a float-term"
-
-        # TODO: MPD
-        # "$mainMod ALT, M, exec, foot -a music -o colors.alpha=1.0 ncmpcpp"
-
         "$mainMod SHIFT, Q, killactive"
         "$mainMod SHIFT, F, togglefloating"
         "$mainMod, F, fullscreen, 0"
+        "$mainMod, P, pseudo"
+        "$mainMod, J, togglesplit"
 
-        # TODO: rofi
+        # rofi
         "$mainMod SHIFT, X, exec, $SCRIPT_ROOT/rofi-powermenu"
         "$mainMod, D, exec, $SCRIPT_ROOT/rofi-launcher drun"
         "$mainMod, R, exec, $SCRIPT_ROOT/rofi-launcher run"
         "$mainMod, W, exec, $SCRIPT_ROOT/rofi-launcher window"
         "$mainMod, V, exec, $SCRIPT_ROOT/rofi-clipboard"
-        "$mainMod, P, pseudo"
-        "$mainMod, J, togglesplit"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
         "$mainMod, up, movefocus, u"
         "$mainMod, down, movefocus, d"
-        # Switch workspaces with mainMod + [0-9]
-        "$mainMod, 1, workspace, 1"
-        "$mainMod, 2, workspace, 2"
-        "$mainMod, 3, workspace, 3"
-        "$mainMod, 4, workspace, 4"
-        "$mainMod, 5, workspace, 5"
-        "$mainMod, 6, workspace, 6"
-        "$mainMod, 7, workspace, 7"
-        "$mainMod, 8, workspace, 8"
-        "$mainMod, 9, workspace, 9"
-        # Move active window to a workspace with mainMod + SHIFT + [0-9]
-        "$mainMod SHIFT, 1, movetoworkspace, 1"
-        "$mainMod SHIFT, 2, movetoworkspace, 2"
-        "$mainMod SHIFT, 3, movetoworkspace, 3"
-        "$mainMod SHIFT, 4, movetoworkspace, 4"
-        "$mainMod SHIFT, 5, movetoworkspace, 5"
-        "$mainMod SHIFT, 6, movetoworkspace, 6"
-        "$mainMod SHIFT, 7, movetoworkspace, 7"
-        "$mainMod SHIFT, 8, movetoworkspace, 8"
-        "$mainMod SHIFT, 9, movetoworkspace, 9"
+
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-
-        # TODO: scripts
-        # screenshot
-        # ", PRINT, exec, $SCRIPT_ROOT/screenshot"
-        # "CTRL, PRINT, exec, $SCRIPT_ROOT/screenshot select"
-
-        # TODO: MPD
-        # mpc
-        # "$mainMod, SPACE, exec, mpc toggle"
 
         # Media keys
         ", XF86MonBrightnessUp, exec, light -A 10"
@@ -151,11 +136,17 @@ in {
         ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-"
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
+        # screenshot
+        ", PRINT, exec, $SCRIPT_ROOT/screenshot"
+        "CTRL, PRINT, exec, $SCRIPT_ROOT/screenshot select"
+
         # TODO: MPD
+        # "$mainMod ALT, M, exec, foot -a music -o colors.alpha=1.0 ncmpcpp"
+        # "$mainMod, SPACE, exec, mpc toggle"
         # ", XF86AudioPlay, exec, mpc -q toggle"
         # ", XF86AudioPrev, exec, mpc -q prev"
         # ", XF86AudioNext, exec, mpc -q next"
-      ];
+      ] ++ workspaceKeys;
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging
         "$mainMod, mouse:272, movewindow"

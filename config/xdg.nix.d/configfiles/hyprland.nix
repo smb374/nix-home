@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   xdg.configFile = {
     "hypr/ags".source = ../../sources/hyprland/ags;
     "hypr/gtklock".source = ../../sources/hyprland/gtklock;
