@@ -30,7 +30,7 @@
         efiSupport = true;
         efiInstallAsRemovable = true;
         device = "nodev";
-        fsIdentifier = "label";
+        fsIdentifier = "uuid";
       };
     };
     kernelPackages = pkgs.linuxPackages_zen;

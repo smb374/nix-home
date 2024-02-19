@@ -23,13 +23,9 @@
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-ld-rs = {
-      url = "github:nix-community/nix-ld-rs";
-      inputs.nixpkgs.follows = "nixos";
-    };
   };
 
-  outputs = { nixpkgs, nixos, home-manager, devenv, ags, nix-ld-rs, ... }:
+  outputs = { nixpkgs, nixos, home-manager, devenv, ags, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -53,10 +49,7 @@
         };
       nixosConfigurations."smb374-nix" = nixos.lib.nixosSystem {
         system = system;
-        modules = [
-          ./os/configuration.nix
-          # { programs.nix-ld.package = nix-ld-rs.packages.${system}.nix-ld-rs; }
-        ];
+        modules = [ ./os/configuration.nix ];
       };
     };
 }
