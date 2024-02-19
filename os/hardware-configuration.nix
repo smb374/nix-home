@@ -14,31 +14,31 @@
   boot.initrd.systemd.emergencyAccess = true;
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
+    device = "/dev/disk/by-partlabel/nixos";
     fsType = "btrfs";
     options = [ "subvol=root" "compress=zstd" ];
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-label/nixos";
+    device = "/dev/disk/by-partlabel/nixos";
     fsType = "btrfs";
     options = [ "subvol=home" "compress=zstd" ];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-label/nixos";
+    device = "/dev/disk/by-partlabel/nixos";
     fsType = "btrfs";
     options = [ "subvol=nix" "compress=zstd" "noatime" ];
   };
 
   fileSystems."/swap" = {
-    device = "/dev/disk/by-label/nixos";
+    device = "/dev/disk/by-partlabel/nixos";
     fsType = "btrfs";
     options = [ "subvol=swap" "noatime" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/NIXEFI";
+    device = "/dev/disk/by-partlabel/NIXEFI";
     fsType = "vfat";
   };
 
