@@ -33,5 +33,10 @@
   # Enable fontconfig
   fonts.fontconfig.enable = true;
   # Manages nix
-  nix.package = pkgs.nix;
+  nix = {
+    package = pkgs.nix;
+    settings = {
+      accept-flake-config = true;
+    };
+  };
 }
