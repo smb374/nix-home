@@ -11,6 +11,7 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" "poyehchen" ];
+    accept-flake-config = true;
   };
   # Allow Unfree
   nixpkgs.config.allowUnfree = true;
