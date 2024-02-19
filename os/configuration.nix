@@ -25,7 +25,11 @@
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
+      grub = {
+        enable = true;
+        efiSupport = true;
+        efiInstallAsRemovable = true;
+      };
     };
     kernelPackages = pkgs.linuxPackages_zen;
   };
