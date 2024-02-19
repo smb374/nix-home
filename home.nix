@@ -33,5 +33,5 @@
   # Enable fontconfig
   fonts.fontconfig.enable = true;
   # Manages nix
-  nix.package = pkgs.nix;
+  nix.package = pkgs.nixVersions.nix_2_19;
 }
