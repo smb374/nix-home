@@ -55,7 +55,7 @@
         system = system;
         modules = [
           ./os/configuration.nix
-          { programs.nix-ld.package = nix-ld-rs.packages.${system}.nix-ld-rs; }
+          # { programs.nix-ld.package = nix-ld-rs.packages.${system}.nix-ld-rs; }
         ];
       };
     };
