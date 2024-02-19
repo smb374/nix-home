@@ -7,10 +7,11 @@
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
   boot.initrd.availableKernelModules =
-    [ "ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk" ];
+    [ "ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk" "usbhid" "usb_storage" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  boot.initrd.systemd.emergencyAccess = true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-partlabel/nixos";
