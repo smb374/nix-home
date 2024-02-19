@@ -29,7 +29,8 @@
         enable = true;
         efiSupport = true;
         efiInstallAsRemovable = true;
-        device = "/dev/disk/by-partlabel/NIXEFI";
+        device = "nodev";
+        fsIdentifier = "label";
       };
     };
     kernelPackages = pkgs.linuxPackages_zen;
