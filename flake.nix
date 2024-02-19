@@ -41,7 +41,7 @@
           (builtins.readFile ./scripts/auto-partition);
       };
       formatter.${system} = pkgs.nixfmt;
-      homeConfigurations."smb374-nix" =
+      homeConfigurations."poyehchen" =
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
@@ -51,7 +51,7 @@
           ];
           extraSpecialArgs = { };
         };
-      nixosConfigurations."poyehchen" = nixos.lib.nixosSystem {
+      nixosConfigurations."smb374-nix" = nixos.lib.nixosSystem {
         system = system;
         modules = [
           ./os/configuration.nix
