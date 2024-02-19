@@ -3,12 +3,12 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://devenv.cachix.org"
       "https://nix-community.cachix.org"
+      "https://devenv.cachix.org"
     ];
     extra-trusted-public-keys = [
-      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
     ];
   };
 
@@ -20,12 +20,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    decl-cachix.url =
-      "github:jonascarpay/declarative-cachix/800c308a85b964eb3447a3cb07e8190fb74dcf59";
-    devenv = {
-      url = "tarball+https://install.devenv.sh/latest";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    devenv.url = "tarball+https://install.devenv.sh/latest";
     ags = {
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,7 +32,7 @@
   };
 
   outputs =
-    { nixpkgs, nixos, home-manager, decl-cachix, devenv, ags, nix-ld-rs, ... }:
+    { nixpkgs, nixos, home-manager, devenv, ags, nix-ld-rs, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -54,7 +49,6 @@
           inherit pkgs;
           modules = [
             ags.homeManagerModules.default
-            decl-cachix.homeManagerModules.declarative-cachix
             ./home.nix
             { home.packages = [ devenv' ]; }
           ];

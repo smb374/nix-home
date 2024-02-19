@@ -20,22 +20,6 @@
         "type": "github"
       }
     },
-    "decl-cachix": {
-      "locked": {
-        "lastModified": 1698062126,
-        "narHash": "sha256-JtL+IM2Vrlfwny2DtD/o1Ot6kWPq3cEFiEKNzWO0ZsY=",
-        "owner": "jonascarpay",
-        "repo": "declarative-cachix",
-        "rev": "800c308a85b964eb3447a3cb07e8190fb74dcf59",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jonascarpay",
-        "repo": "declarative-cachix",
-        "rev": "800c308a85b964eb3447a3cb07e8190fb74dcf59",
-        "type": "github"
-      }
-    },
     "devenv": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -334,7 +318,6 @@
     "root": {
       "inputs": {
         "ags": "ags",
-        "decl-cachix": "decl-cachix",
         "devenv": "devenv",
         "home-manager": "home-manager",
         "nix-ld-rs": "nix-ld-rs",
