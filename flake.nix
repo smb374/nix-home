@@ -11,7 +11,10 @@
     };
     decl-cachix.url =
       "github:jonascarpay/declarative-cachix/800c308a85b964eb3447a3cb07e8190fb74dcf59";
-    devenv.url = "https://install.devenv.sh/latest";
+    devenv = {
+      url = "https://install.devenv.sh/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     ags = {
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
