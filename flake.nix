@@ -22,7 +22,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos, home-manager, decl-cachix, devenv, ags, nix-ld-rs, ... }:
+  outputs =
+    { nixpkgs, nixos, home-manager, decl-cachix, devenv, ags, nix-ld-rs, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -30,8 +31,8 @@
       devenv' = devenv.outputs.packages.${system}.default;
     in {
       packages.${system} = {
-        auto-partition =
-          pkgs'.writeShellScriptBin "auto-partition" (builtins.readFile ./scripts/auto-partition);
+        auto-partition = pkgs'.writeShellScriptBin "auto-partition"
+          (builtins.readFile ./scripts/auto-partition);
       };
       formatter.${system} = pkgs.nixfmt;
       homeConfigurations."smb374-nix" =
