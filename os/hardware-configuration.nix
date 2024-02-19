@@ -31,6 +31,7 @@
     "xhci_pci"
   ];
   boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelParams = [ "boot.shell_on_fail" "root=/dev/disk/by-partuuid/nixos" ];
   boot.extraModulePackages = [ ];
   boot.initrd.systemd.emergencyAccess = true;
 
