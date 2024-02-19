@@ -18,7 +18,18 @@
     "usbhid"
     "xhci_pci"
   ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [
+    "ahci"
+    "virtio_blk"
+    "virtio_pci"
+    "virtio_scsi"
+    "sd_mod"
+    "sr_mod"
+    "uas"
+    "usb_storage"
+    "usbhid"
+    "xhci_pci"
+  ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   boot.initrd.systemd.emergencyAccess = true;
