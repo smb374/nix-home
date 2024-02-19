@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./programs.nix.d/ags.nix
+    ./programs.nix.d/cava.nix
     ./programs.nix.d/firefox.nix
     ./programs.nix.d/fish.nix
     ./programs.nix.d/foot.nix

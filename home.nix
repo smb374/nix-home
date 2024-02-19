@@ -26,6 +26,12 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
+  home.pointerCursor = {
+    gtk.enable = true;
+    name = "Qogir-dark";
+    package = pkgs.qogir-icon-theme;
+    size = 24;
+  };
 
   # Self manage.
   programs.home-manager.enable = true;
@@ -36,9 +42,8 @@
     package = pkgs.nix;
     settings = {
       substituters = [ "https://cache.nixos.org" ];
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      ];
+      trusted-public-keys =
+        [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
       extra-substituters =
         [ "https://nix-community.cachix.org" "https://devenv.cachix.org" ];
       extra-trusted-public-keys = [
