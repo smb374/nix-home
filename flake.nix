@@ -51,7 +51,7 @@
           ];
           extraSpecialArgs = { };
         };
-      nixosConfigurations."smb374-nix" = nixos.lib.nixosSystem {
+      nixosConfigurations."poyehchen" = nixos.lib.nixosSystem {
         system = system;
         modules = [
           ./os/configuration.nix

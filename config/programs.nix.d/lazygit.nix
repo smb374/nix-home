@@ -1,8 +1,7 @@
-{...}:
-{
+{ ... }: {
   programs.lazygit = {
     enable = true;
-    setting = {
+    settings = {
       gui.theme = {
         activeBorderColor = [ "#b4befe" "bold" ];
         inactiveBorderColor = [ "#a6adc8" ];

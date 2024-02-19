@@ -22,5 +22,5 @@ Run the following command to set up home-directory:
 
 ```sh
 nix run home-manager/master --accept-flake-config -- switch \
-    --flake "github:smb374/nix-home#smb374-nix" --no-write-lock-file
+    --flake "github:smb374/nix-home#poyehchen" --no-write-lock-file
 ```
