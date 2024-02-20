@@ -1,3 +1,6 @@
-# NixOS config
+# System configuration files
 
-Use hard link and link these to `/etc/nixos` for editing it as an user. (using soft link will cause problems)
+- `configuration.nix`: General system configuration.
+- `hardware-configuration.nix`: General system hardware configuration.
+- `hardware-configuration-qemu.nix`: QEMU configuration (include virtio modules & QEMU guest).
+- `disko.nix`: Disk configuration.
