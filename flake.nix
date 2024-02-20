@@ -82,6 +82,7 @@
         device = "/dev/vda";
         isQemu = true;
         bootLoader = "systemd";
+        extraModules = [ ./os/modules/greetd-hyprland.nix ];
       };
       nixosConfigurations."smb374-nix" = generalOs {
         device = "/dev/nvme0n1";
