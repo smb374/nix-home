@@ -20,19 +20,7 @@
 
   # Settings
 
-  boot = {
-    loader = {
-      efi.canTouchEfiVariables = false;
-      grub = {
-        enable = true;
-        efiSupport = true;
-        efiInstallAsRemovable = true;
-        device = "nodev";
-        fsIdentifier = "uuid";
-      };
-    };
-    kernelPackages = pkgs.linuxPackages_zen;
-  };
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   console = { keyMap = "us"; };
 
@@ -69,10 +57,6 @@
       pinentryFlavor = "curses";
     };
     htop.enable = true;
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-    };
     mtr.enable = true;
     nix-ld = {
       enable = true;
@@ -130,14 +114,6 @@
     polkit.enable = true;
   };
   services = {
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r -c Hyprland";
-        };
-      };
-    };
     openssh.enable = true;
     pipewire = {
       enable = true;

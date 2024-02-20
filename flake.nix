@@ -33,7 +33,20 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       devenv' = devenv.outputs.packages.${system}.default;
-      generalOs = { device ? "/dev/sda", isQemu ? false }:
+      generalOs =
+      {
+        device ? "/dev/sda", # Root disk
+        isQemu ? false, # Is QEMU VM?
+        bootLoader ? "grub-removable", # Bootloader selection
+        extraModules ? [ ] # Extra modules to load
+      }:
+      let
+        bootModule = {
+          grub = ./os/boot/grub.nix;
+          grub-removable = ./os/boot/grub-removable.nix;
+          systemd = ./os/boot/systemd-boot.nix;
+        };
+      in
         nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
@@ -42,7 +55,9 @@
             { _module.args.device = device; }
             ./os/configuration.nix
             ./os/hardware/general.nix
-          ] ++ (if isQemu then [ ./os/hardware/qemu.nix ] else [ ]);
+            (bootModule.${bootLoader} or bootModule.grub-removable)
+          ] ++ (if isQemu then [ ./os/hardware/qemu.nix ] else [ ])
+            ++ extraModules;
         };
     in {
       packages.${system} = {
@@ -60,12 +75,18 @@
           ];
           extraSpecialArgs = { };
         };
-      nixosConfigurations."nix-general" = generalOs { };
+      nixosConfigurations."nix-general" = generalOs {
+        extraModules = [ ./os/modules/greetd-hyprland.nix ];
+      };
       nixosConfigurations."nix-qemu" = generalOs {
         device = "/dev/vda";
         isQemu = true;
+        bootLoader = "systemd";
       };
-      nixosConfigurations."smb374-nix" =
-        generalOs { device = "/dev/nvme0n1"; };
+      nixosConfigurations."smb374-nix" = generalOs {
+        device = "/dev/nvme0n1";
+        extraModules = [ ./os/modules/greetd-hyprland.nix ];
+        bootLoader = "systemd";
+      };
     };
 }

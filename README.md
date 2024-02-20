@@ -18,41 +18,11 @@ nixos-install --flake "github:smb374/nix-home#smb374-nix" --no-write-lock-file
 
 There are 3 different default profiles:
 
-- `github:smb374/nix-home#smb374-nix`: use `/dev/sda` as root disk.
-- `github:smb374/nix-home#smb374-nix-vda`: use `/dev/vda` as root disk (QEMU).
-- `github:smb374/nix-home#smb374-nix-nvme0n1`: use `/dev/nvme0n1` as root disk.
+- `github:smb374/nix-home#nix-general`: General OS with `/dev/sda`.
+- `github:smb374/nix-home#nix-qemu`: QEMU Virtual Machine with VirtIO disk (`/dev/vda`).
+- `github:smb374/nix-home#smb374-nix`: My laptop.
 
-If no profile is suitable, clone this repo and add the desirable profile by yourself:
-
-```nix
-{
-  # Default profiles
-  nixosConfigurations."smb374-nix" = generalOs { };
-  nixosConfigurations."smb374-nix-vda" = generalOs {
-    device = "/dev/vda";
-    isQemu = true; # enable if using in qemu.
-  };
-  nixosConfigurations."smb374-nix-nvme0n1" =
-    generalOs { device = "/dev/nvme0n1"; };
-  # Custom profile using generalOs function
-  nixosConfigurations."local-general" = generalOs { device = "[Your device]"; };
-  # Custom profile using nixpkgs.lib.nixosSystem
-  nixosConfigurations."local-custom" =
-    nixpkgs.lib.nixosSystem {
-      system = system;
-      modules = [
-        disko.nixosModules.disko
-        ./os/disko.nix
-        { _module.args.device = "[Your device]"; }
-        ./os/configuration.nix
-        # Uncomment the one that is suitable or make your own.
-        # ./os/hardware-configuration.nix
-        # ./os/hardware-configuration-qemu.nix
-        # Add modules below...
-      ];
-    };
-};
-```
+If no profile is suitable, clone this repo and add the desirable profile by yourself.
 
 Then run the `disko` & `nixos-install` commands with `path:.#profile-name`,
 otherwise you will have to commit the changes to use `.#profile-name` in the
