@@ -1,7 +1,7 @@
-{ lib, ... }: {
+{ device ? "/dev/sda", ... }: {
   disko.devices = {
     disk.main = {
-      device = lib.mkDefault "/dev/sda";
+      device = device;
       type = "disk";
       content = {
         type = "gpt";

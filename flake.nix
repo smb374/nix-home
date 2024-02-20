@@ -38,7 +38,8 @@
           system = system;
           modules = [
             disko.nixosModules.disko
-            { disko.devices.disk.main.device = device; }
+            ./os/disko.nix
+            { _module.args.device = device; }
             ./os/configuration.nix
           ];
         };
