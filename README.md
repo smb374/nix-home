@@ -9,9 +9,9 @@ Run the following command and type the root password when prompted:
 nix --experimental-features "nix-command flakes" \
     run "github:nix-community/disko" -- \
     --mode disko \
-    --flake "github:smb374/nix-home/disko#smb374-nix"
+    --flake "github:smb374/nix-home#[profile-name]"
 # Perform installation
-nixos-install --flake "github:smb374/nix-home#smb374-nix" --no-write-lock-file
+nixos-install --flake "github:smb374/nix-home#[profile-name]" --no-write-lock-file
 ```
 
 ### Custom Profile
