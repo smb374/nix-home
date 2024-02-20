@@ -33,7 +33,7 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       devenv' = devenv.outputs.packages.${system}.default;
-      generalOs = { device ? "/dev/sda" }:
+      generalOs = { device ? "/dev/sda", isQemu ? false }:
         nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
@@ -41,7 +41,10 @@
             ./os/disko.nix
             { _module.args.device = device; }
             ./os/configuration.nix
-          ];
+          ] ++ (if isQemu then
+            [ ./os/hardware-configuration-qemu.nix ]
+          else
+            [ ./os/hardware-configuration.nix ]);
         };
     in {
       packages.${system} = {
@@ -60,7 +63,10 @@
           extraSpecialArgs = { };
         };
       nixosConfigurations."smb374-nix" = generalOs { };
-      nixosConfigurations."smb374-nix-vda" = generalOs { device = "/dev/vda"; };
+      nixosConfigurations."smb374-nix-vda" = generalOs {
+        device = "/dev/vda";
+        isQemu = true;
+      };
       nixosConfigurations."smb374-nix-nvme0n1" =
         generalOs { device = "/dev/nvme0n1"; };
     };
