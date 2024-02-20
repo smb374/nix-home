@@ -34,6 +34,7 @@
       gtklock
       hyprpaper
       light
+      lunarvim
       nil
       nix-prefetch
       nodejs
