@@ -13,27 +13,29 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos.url = "github:NixOS/nixpkgs/nixos-23.11";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     devenv.url = "tarball+https://install.devenv.sh/latest";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     ags = {
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { nixpkgs, nixos, home-manager, devenv, ags, ... }:
+  outputs = { nixpkgs, home-manager, ags, devenv, disko, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      pkgs' = nixos.legacyPackages.${system};
       devenv' = devenv.outputs.packages.${system}.default;
     in {
       packages.${system} = {
-        auto-partition = pkgs'.writeShellScriptBin "auto-partition"
+        auto-partition = pkgs.writeShellScriptBin "auto-partition"
           (builtins.readFile ./scripts/auto-partition);
       };
       formatter.${system} = pkgs.nixfmt;
@@ -47,9 +49,12 @@
           ];
           extraSpecialArgs = { };
         };
-      nixosConfigurations."smb374-nix" = nixos.lib.nixosSystem {
+      nixosConfigurations."smb374-nix" = nixpkgs.lib.nixosSystem {
         system = system;
-        modules = [ ./os/configuration.nix ];
+        modules = [
+          disko.nixosModules.disko
+          ./os/configuration.nix
+        ];
       };
     };
 }
