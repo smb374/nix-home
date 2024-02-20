@@ -20,7 +20,7 @@ There are 3 different default profiles:
 
 - `github:smb374/nix-home#smb374-nix`: use `/dev/sda` as root disk.
 - `github:smb374/nix-home#smb374-nix-vda`: use `/dev/vda` as root disk (QEMU).
-- `github:smb374/nix-home#smb374-nvme0n1`: use `/dev/nvme0n1` as root disk.
+- `github:smb374/nix-home#smb374-nix-nvme0n1`: use `/dev/nvme0n1` as root disk.
 
 If no profile is suitable, clone this repo and add the desirable profile by yourself:
 

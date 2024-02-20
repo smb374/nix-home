@@ -8,9 +8,9 @@
         partitions = {
           ESP = {
             priority = 1;
-            name = "NIXEFI";
+            name = "ESP";
             start = "1MiB";
-            end = "1GiB";
+            end = "1G";
             type = "EF00";
             content = {
               type = "filesystem";
@@ -19,7 +19,7 @@
             };
           };
           root = {
-            name = "nixos";
+            name = "root";
             size = "100%";
             content = {
               type = "btrfs";
