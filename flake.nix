@@ -33,6 +33,15 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       devenv' = devenv.outputs.packages.${system}.default;
+      generalOs = { device ? "/dev/sda" }:
+        nixpkgs.lib.nixosSystem {
+          system = system;
+          modules = [
+            disko.nixosModules.disko
+            { disko.devices.disk.main.device = device; }
+            ./os/configuration.nix
+          ];
+        };
     in {
       packages.${system} = {
         auto-partition = pkgs.writeShellScriptBin "auto-partition"
@@ -49,12 +58,9 @@
           ];
           extraSpecialArgs = { };
         };
-      nixosConfigurations."smb374-nix" = nixpkgs.lib.nixosSystem {
-        system = system;
-        modules = [
-          disko.nixosModules.disko
-          ./os/configuration.nix
-        ];
-      };
+      nixosConfigurations."smb374-nix" = generalOs { };
+      nixosConfigurations."smb374-nix-vda" = generalOs { device = "/dev/vda"; };
+      nixosConfigurations."smb374-nix-nvme0n1" =
+        generalOs { device = "/dev/nvme0n1"; };
     };
 }

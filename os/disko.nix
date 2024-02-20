@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{ lib, ... }: {
   disko.devices = {
     disk.main = {
       device = lib.mkDefault "/dev/sda";
@@ -41,7 +40,7 @@
                 "/swap" = {
                   mountpoint = "/.swap";
                   mountOptions = [ "noatime" ];
-                  swap.swapfile.size = "4GiB";
+                  swap.swapfile.size = "4G";
                 };
               };
             };

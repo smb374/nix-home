@@ -4,6 +4,7 @@
 
 { pkgs, ... }: {
   imports = [ # Include the results of the hardware scan.
+    ./disko.nix
     ./hardware-configuration.nix
   ];
 
