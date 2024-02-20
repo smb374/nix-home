@@ -41,10 +41,8 @@
             ./os/disko.nix
             { _module.args.device = device; }
             ./os/configuration.nix
-          ] ++ (if isQemu then
-            [ ./os/hardware-configuration-qemu.nix ]
-          else
-            [ ./os/hardware-configuration.nix ]);
+            ./os/hardware/general.nix
+          ] ++ (if isQemu then [ ./os/hardware/qemu.nix ] else [ ]);
         };
     in {
       packages.${system} = {
@@ -62,12 +60,12 @@
           ];
           extraSpecialArgs = { };
         };
-      nixosConfigurations."smb374-nix" = generalOs { };
-      nixosConfigurations."smb374-nix-vda" = generalOs {
+      nixosConfigurations."nix-general" = generalOs { };
+      nixosConfigurations."nix-qemu" = generalOs {
         device = "/dev/vda";
         isQemu = true;
       };
-      nixosConfigurations."smb374-nix-nvme0n1" =
+      nixosConfigurations."smb374-nix" =
         generalOs { device = "/dev/nvme0n1"; };
     };
 }
