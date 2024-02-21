@@ -22,8 +22,9 @@
       ] ++ (if isQemu then [ ../os/hardware/qemu.nix ] else [ ])
         ++ extraModules;
     };
-  genDiskoConfigs = disks: builtins.foldl' (acc: x:
-    acc // {
-      "${x}" = import ../os/disko.nix { device = "/dev/${x}"; };
-    }) { } disks;
+  genDiskoConfigs = disks:
+    builtins.foldl' (acc: x:
+      acc // {
+        "${x}" = import ../os/disko.nix { device = "/dev/${x}"; };
+      }) { } disks;
 }
