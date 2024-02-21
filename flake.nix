@@ -60,10 +60,6 @@
             ++ extraModules;
         };
     in {
-      packages.${system} = {
-        auto-partition = pkgs.writeShellScriptBin "auto-partition"
-          (builtins.readFile ./scripts/auto-partition);
-      };
       formatter.${system} = pkgs.nixfmt;
       homeConfigurations."poyehchen" =
         home-manager.lib.homeManagerConfiguration {
