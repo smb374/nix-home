@@ -47,6 +47,11 @@
           inherit disko;
         };
       in {
+        diskoConfigurations."sda" = import ./os/disko.nix;
+        diskoConfigurations."vda" =
+          import ./os/disko.nix { device = "/dev/vda"; };
+        diskoConfigurations."nvme0n1" =
+          import ./os/disko.nix { device = "/dev/nvme0n1"; };
         homeConfigurations."poyehchen" =
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
