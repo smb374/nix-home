@@ -11,10 +11,16 @@
   };
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
+    # Nixpkgs, Home-Manager, and flake-parts.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    # Other inputs
+    ags = {
+      url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     devenv.url = "tarball+https://install.devenv.sh/latest";
@@ -22,67 +28,48 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ags = {
-      url = "github:Aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { nixpkgs, home-manager, ags, devenv, disko, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      devenv' = devenv.outputs.packages.${system}.default;
-      generalOs =
-      {
-        device ? "/dev/sda", # Root disk
-        isQemu ? false, # Is QEMU VM?
-        bootLoader ? "grub-removable", # Bootloader selection
-        extraModules ? [ ] # Extra modules to load
-      }:
-      let
-        bootModule = {
-          grub = ./os/boot/grub.nix;
-          grub-removable = ./os/boot/grub-removable.nix;
-          systemd = ./os/boot/systemd-boot.nix;
-        };
-      in
-        nixpkgs.lib.nixosSystem {
-          system = system;
-          modules = [
-            disko.nixosModules.disko
-            ./os/disko.nix
-            { _module.args.device = device; }
-            ./os/configuration.nix
-            ./os/hardware/general.nix
-            (bootModule.${bootLoader} or bootModule.grub-removable)
-          ] ++ (if isQemu then [ ./os/hardware/qemu.nix ] else [ ])
-            ++ extraModules;
-        };
-    in {
-      formatter.${system} = pkgs.nixfmt;
-      homeConfigurations."poyehchen" =
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ags.homeManagerModules.default
-            ./home.nix
-            { home.packages = [ devenv' ]; }
-          ];
-          extraSpecialArgs = { };
-        };
-      nixosConfigurations."nix-general" = generalOs {
-        extraModules = [ ./os/modules/greetd-hyprland.nix ];
+  outputs =
+    inputs@{ nixpkgs, home-manager, flake-parts, ags, devenv, disko, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems =
+        [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+      perSystem = { config, self', inputs', pkgs, system, ... }: {
+        formatter = pkgs.nixfmt;
       };
-      nixosConfigurations."nix-qemu" = generalOs {
-        device = "/dev/vda";
-        isQemu = true;
-        bootLoader = "systemd";
-      };
-      nixosConfigurations."smb374-nix" = generalOs {
-        device = "/dev/nvme0n1";
-        extraModules = [ ./os/modules/greetd-hyprland.nix ];
-        bootLoader = "systemd";
+      flake = let
+        system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system};
+        devenv' = devenv.outputs.packages.${system}.default;
+        myLib = import ./lib {
+          inherit (nixpkgs) lib;
+          inherit disko;
+        };
+      in {
+        homeConfigurations."poyehchen" =
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [
+              ags.homeManagerModules.default
+              ./home.nix
+              { home.packages = [ devenv' ]; }
+            ];
+            extraSpecialArgs = { };
+          };
+        nixosConfigurations."nix-general" = myLib.generalOs {
+          extraModules = [ ./os/modules/greetd-hyprland.nix ];
+        };
+        nixosConfigurations."nix-qemu" = myLib.generalOs {
+          device = "/dev/vda";
+          isQemu = true;
+          bootLoader = "systemd";
+        };
+        nixosConfigurations."smb374-nix" = myLib.generalOs {
+          device = "/dev/nvme0n1";
+          extraModules = [ ./os/modules/greetd-hyprland.nix ];
+          bootLoader = "systemd";
+        };
       };
     };
 }
