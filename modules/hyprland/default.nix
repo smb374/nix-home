@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.modules.hyprland;
 in
@@ -40,8 +40,17 @@ in
     # Enable other modules
     modules = {
       ags.enable = true;
+      dunst.enable = true;
+      fcitx5.enable = true;
       rofi.enable = true;
       gtklock.enable = true;
     };
+    # Enable packages for screenshot script.
+    home.packages = with pkgs; [
+      light
+      slurp
+      wayshot
+      wl-clipboard
+    ];
   };
 }

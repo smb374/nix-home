@@ -1,0 +1,11 @@
+{
+  "lspconfig": {
+    "nil_ls": {
+      "nil": {
+        "flake": {
+          "autoEvalInputs": true
+        }
+      }
+    }
+  }
+}

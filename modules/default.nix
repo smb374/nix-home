@@ -4,6 +4,8 @@
     ./nix.nix
     ./hyprland
     ./ags.nix
+    ./dunst.nix
+    ./fcitx5.nix
     ./gtklock.nix
     ./rofi.nix
   ];
