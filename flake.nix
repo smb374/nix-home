@@ -36,41 +36,53 @@
       systems =
         [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, ... }: {
-        formatter = pkgs.nixfmt;
+        formatter = pkgs.nixpkgs-fmt;
       };
-      flake = let
-        system = "x86_64-linux";
-        pkgs = nixpkgs.legacyPackages.${system};
-        devenv' = devenv.outputs.packages.${system}.default;
-        myLib = import ./lib {
-          inherit (nixpkgs) lib;
-          inherit disko;
-        };
-      in {
-        diskoConfigurations = myLib.genDiskoConfigs [ "sda" "vda" "nvme0n1" ];
-        homeConfigurations."poyehchen" =
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [
-              ags.homeManagerModules.default
-              ./home.nix
-              { home.packages = [ devenv' ]; }
-            ];
-            extraSpecialArgs = { };
+      flake =
+        let
+          system = "x86_64-linux";
+          pkgs = nixpkgs.legacyPackages.${system};
+          devenv' = devenv.outputs.packages.${system}.default;
+          myLib = import ./lib {
+            inherit (nixpkgs) lib;
+            inherit disko;
           };
-        nixosConfigurations."nix-general" = myLib.generalOs {
-          extraModules = [ ./os/modules/greetd-hyprland.nix ];
+        in
+        {
+          diskoConfigurations = myLib.genDiskoConfigs [ "sda" "vda" "nvme0n1" ];
+          homeConfigurations."poyehchen" =
+            home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              modules = [
+                ags.homeManagerModules.default
+                ./home.nix
+                { home.packages = [ devenv' ]; }
+              ];
+              extraSpecialArgs = { };
+            };
+          homeConfigurations."test" =
+            home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              modules = [
+                ags.homeManagerModules.default
+                ./home-test.nix
+                { home.packages = [ devenv' ]; }
+              ];
+              extraSpecialArgs = { inherit inputs; };
+            };
+          nixosConfigurations."nix-general" = myLib.generalOs {
+            extraModules = [ ./os/modules/greetd-hyprland.nix ];
+          };
+          nixosConfigurations."nix-qemu" = myLib.generalOs {
+            device = "/dev/vda";
+            isQemu = true;
+            bootLoader = "systemd";
+          };
+          nixosConfigurations."smb374-nix" = myLib.generalOs {
+            device = "/dev/nvme0n1";
+            extraModules = [ ./os/modules/greetd-hyprland.nix ];
+            bootLoader = "systemd";
+          };
         };
-        nixosConfigurations."nix-qemu" = myLib.generalOs {
-          device = "/dev/vda";
-          isQemu = true;
-          bootLoader = "systemd";
-        };
-        nixosConfigurations."smb374-nix" = myLib.generalOs {
-          device = "/dev/nvme0n1";
-          extraModules = [ ./os/modules/greetd-hyprland.nix ];
-          bootLoader = "systemd";
-        };
-      };
     };
 }

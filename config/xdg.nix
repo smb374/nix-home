@@ -6,7 +6,8 @@ let
     standard_dialogs = "gtk3";
     style = "kvantum-dark";
   };
-in {
+in
+{
   imports = [ ./xdg.nix.d/configfiles/hyprland.nix ./xdg.nix.d/portal.nix ];
   xdg = {
     enable = true;

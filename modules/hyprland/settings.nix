@@ -1,7 +1,6 @@
 { config, lib, ... }:
 let
-  # NOTE: Check monitor name.
-  monitor = "eDP-1";
+  cfg = config.modules.hyprland;
   home = config.home.homeDirectory;
   hyprlandRoot = "${home}/.config/hypr";
   workspaceKeys = lib.lists.concatMap
@@ -15,15 +14,11 @@ let
   floatRule = type: expr: "float,${type}:${expr}";
 in
 {
-  wayland.windowManager.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    plugins = [ ];
-    settings = {
-      # NOTE: Check monitor name.
+  config = lib.mkIf cfg.enable {
+    wayland.windowManager.hyprland.settings = {
       monitor = [
-        "${monitor},1920x1080@60,0x0,1"
-        ",preferred,auto,1,mirror,${monitor}"
+        "${cfg.monitor},1920x1080@60,0x0,1"
+        ",preferred,auto,1,mirror,${cfg.monitor}"
       ];
       env = [
         "HYPRLAND_ROOT,${hyprlandRoot}"
@@ -158,3 +153,4 @@ in
     };
   };
 }
+
