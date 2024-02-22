@@ -42,6 +42,7 @@ in
       ags.enable = true;
       dunst.enable = true;
       fcitx5.enable = true;
+      foot.enable = true;
       rofi.enable = true;
       gtklock.enable = true;
     };

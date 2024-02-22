@@ -6,6 +6,7 @@
     ./ags.nix
     ./dunst.nix
     ./fcitx5.nix
+    ./foot.nix
     ./gtklock.nix
     ./rofi.nix
   ];

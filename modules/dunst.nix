@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.modules.hyprland;
+  cfg = config.modules.dunst;
 in
 {
   options = {
