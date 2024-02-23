@@ -3,6 +3,7 @@
   imports = [
     ./nix.nix
     # "Big" modules
+    ./fish
     ./gpg
     ./hyprland
     # "Small" modules
