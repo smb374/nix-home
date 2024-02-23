@@ -4,7 +4,7 @@ let
 in
 {
   options = {
-    modules.ags = { enable = lib.mkEnableOption "ags"; };
+    modules.ags.enable = lib.mkEnableOption "ags";
   };
   config = lib.mkIf cfg.enable {
     programs.ags = {

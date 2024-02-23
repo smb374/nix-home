@@ -4,7 +4,7 @@ let
 in
 {
   options = {
-    modules.dunst = { enable = lib.mkEnableOption "dunst"; };
+    modules.dunst.enable = lib.mkEnableOption "dunst";
   };
   config = lib.mkIf cfg.enable {
     services.dunst = {

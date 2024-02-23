@@ -4,7 +4,7 @@ let
 in
 {
   options = {
-    modules.fish = { enable = lib.mkEnableOption "fish"; };
+    modules.fish.enable = lib.mkEnableOption "fish";
   };
   config = lib.mkIf cfg.enable {
     programs.fish = {

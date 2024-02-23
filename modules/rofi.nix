@@ -4,7 +4,7 @@ let
 in
 {
   options = {
-    modules.rofi = { enable = lib.mkEnableOption "hyprland"; };
+    modules.rofi.enable = lib.mkEnableOption "rofi";
   };
   config = lib.mkIf cfg.enable {
     programs.rofi = {

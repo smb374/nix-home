@@ -9,6 +9,7 @@
   # parent one is disabled.
   modules = {
     # "Big" modules
+    firefox.enable = true;
     fish.enable = true;
     gpg.enable = true;
     hyprland.enable = true;
@@ -16,5 +17,6 @@
     dunst.enable = true;
     fcitx5.enable = true;
     foot.enable = true;
+    lazygit.enable = true;
   };
 }

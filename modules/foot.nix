@@ -4,9 +4,7 @@ let
 in
 {
   options = {
-    modules.foot = {
-      enable = lib.mkEnableOption "foot";
-    };
+    modules.foot.enable = lib.mkEnableOption "foot";
   };
   config = lib.mkIf cfg.enable {
     programs.foot = {

@@ -4,7 +4,7 @@ let
 in
 {
   options = {
-    modules.fcitx5 = { enable = lib.mkEnableOption "fcitx5"; };
+    modules.fcitx5.enable = lib.mkEnableOption "fcitx5";
   };
   config = lib.mkIf cfg.enable {
     i18n.inputMethod = {

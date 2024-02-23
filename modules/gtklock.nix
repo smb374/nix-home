@@ -4,7 +4,7 @@ let
 in
 {
   options = {
-    modules.gtklock = { enable = lib.mkEnableOption "ags"; };
+    modules.gtklock.enable = lib.mkEnableOption "ags";
   };
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [ gtklock ];

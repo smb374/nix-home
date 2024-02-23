@@ -4,7 +4,7 @@ let
 in
 {
   options = {
-    modules.gpg = { enable = lib.mkEnableOption "gpg"; };
+    modules.gpg.enable = lib.mkEnableOption "gpg";
   };
   config = lib.mkIf cfg.enable {
     programs.gpg = {
