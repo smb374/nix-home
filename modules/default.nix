@@ -2,7 +2,10 @@
 {
   imports = [
     ./nix.nix
+    # "Big" modules
+    ./gpg
     ./hyprland
+    # "Small" modules
     ./ags.nix
     ./dunst.nix
     ./fcitx5.nix

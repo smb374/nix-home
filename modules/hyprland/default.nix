@@ -43,8 +43,8 @@ in
       dunst.enable = true;
       fcitx5.enable = true;
       foot.enable = true;
-      rofi.enable = true;
       gtklock.enable = true;
+      rofi.enable = true;
     };
     # Enable packages for screenshot script.
     home.packages = with pkgs; [
@@ -53,5 +53,6 @@ in
       wayshot
       wl-clipboard
     ];
+    services.cliphist.enable = true;
   };
 }
