@@ -37,13 +37,25 @@ in
         recursive = true;
       };
     };
+    # Enable xdg-desktop-portal
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-hyprland
+      ];
+      config.common.default = "*";
+    };
     # Enable other modules
     modules = {
       ags.enable = true;
       dunst.enable = true;
       fcitx5.enable = true;
+      fonts.enable = true;
       foot.enable = true;
+      gtk.enable = true;
       gtklock.enable = true;
+      qt.enable = true;
       rofi.enable = true;
     };
     # Enable packages for screenshot script.
