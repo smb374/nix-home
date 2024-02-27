@@ -1,18 +1,22 @@
-{ config, lib, pkgs, ... }:
-let
-  cfg = config.modules.hyprland;
-in
+{ lib, pkgs, ... }:
 {
   imports = [
     ./settings.nix
+    # Other modules to enable.
+    ../ags.nix
+    ../dunst.nix
+    ../fcitx5.nix
+    ../fonts.nix
+    ../foot.nix
+    ../gtk.nix
+    ../gtklock.nix
+    ../qt.nix
+    ../rofi.nix
   ];
   options = {
-    modules.hyprland = {
-      enable = lib.mkEnableOption "hyprland";
-      monitor = lib.mkOption { default = "eDP-1"; };
-    };
+    modules.hyprland.monitor = lib.mkOption { default = "eDP-1"; };
   };
-  config = lib.mkIf cfg.enable {
+  config = {
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -46,20 +50,13 @@ in
       ];
       config.common.default = "*";
     };
-    # Enable other modules
-    modules = {
-      ags.enable = true;
-      dunst.enable = true;
-      fcitx5.enable = true;
-      fonts.enable = true;
-      foot.enable = true;
-      gtk.enable = true;
-      gtklock.enable = true;
-      qt.enable = true;
-      rofi.enable = true;
+    # Allow software renderer for machine in the wild.
+    home.sessionVariables = {
+      WLR_RENDERER_ALLOW_SOFTWARE = 1;
     };
     # Enable packages for screenshot script.
     home.packages = with pkgs; [
+      hyprpaper
       light
       slurp
       wayshot

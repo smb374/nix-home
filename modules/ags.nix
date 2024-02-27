@@ -1,16 +1,8 @@
-{ config, lib, pkgs, ... }:
-let
-  cfg = config.modules.ags;
-in
+{ pkgs, ... }:
 {
-  options = {
-    modules.ags.enable = lib.mkEnableOption "ags";
+  programs.ags = {
+    enable = true;
+    extraPackages = with pkgs; [ gtksourceview webkitgtk accountsservice ];
   };
-  config = lib.mkIf cfg.enable {
-    programs.ags = {
-      enable = true;
-      extraPackages = with pkgs; [ gtksourceview webkitgtk accountsservice ];
-    };
-    home.packages = with pkgs; [ bun brightnessctl sassc ];
-  };
+  home.packages = with pkgs; [ bun brightnessctl sassc ];
 }
