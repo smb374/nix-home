@@ -1,4 +1,6 @@
-{ ... }: {
+{ ... }:
+
+{
   imports = [
     ./programs.nix.d/ags.nix
     ./programs.nix.d/cava.nix

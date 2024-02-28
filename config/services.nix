@@ -1,4 +1,6 @@
-{ ... }: {
+{ ... }:
+
+{
   imports = [ ./services.nix.d/dunst.nix ];
   services = {
     cliphist.enable = true;

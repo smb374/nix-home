@@ -1,4 +1,6 @@
-{ ... }: {
+{ ... }:
+
+{
   xdg.configFile = {
     "hypr/ags" = {
       source = ../../sources/hyprland/ags;

@@ -1,4 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+
+{
   services.greetd = {
     enable = true;
     settings = {
@@ -7,10 +9,4 @@
       };
     };
   };
-  # programs = {
-  #   hyprland = {
-  #     enable = true;
-  #     xwayland.enable = true;
-  #   };
-  # };
 }

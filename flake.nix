@@ -47,7 +47,6 @@
           inherit disko;
         };
       in {
-        diskoConfigurations = myLib.genDiskoConfigs [ "sda" "vda" "nvme0n1" ];
         homeConfigurations."poyehchen" =
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;

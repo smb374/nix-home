@@ -1,11 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+
+{
   gtk = {
     enable = true;
-    # cursorTheme = {
-    #   name = "Qogir-dark";
-    #   package = pkgs.qogir-icon-theme;
-    #   size = 24;
-    # };
     font = {
       name = "Noto Sans CJK TC";
       package = pkgs.noto-fonts-cjk-sans;
