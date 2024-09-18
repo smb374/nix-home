@@ -1,13 +1,15 @@
-{ lib, ... }:
+{ config, lib, modulesPath, ... }:
 
 {
-  imports = [ ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
   boot.initrd.availableKernelModules =
-    [ "ahci" "sd_mod" "sr_mod" "uas" "usb_storage" "usbhid" "xhci_pci" ];
+    [ "nvme" "ahci" "sd_mod" "sr_mod" "uas" "usb_storage" "usbhid" "xhci_pci" ];
   boot.initrd.kernelModules =
-    [ "ahci" "sd_mod" "sr_mod" "uas" "usb_storage" "usbhid" "xhci_pci" ];
-  boot.kernelModules = [ ];
+    [ "nvme" "ahci" "sd_mod" "sr_mod" "uas" "usb_storage" "usbhid" "xhci_pci" ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.kernelParams = [ "boot.shell_on_fail" ];
   boot.extraModulePackages = [ ];
   boot.initrd.systemd.emergencyAccess = true;
@@ -20,4 +22,5 @@
   # networking.interfaces.enp1s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

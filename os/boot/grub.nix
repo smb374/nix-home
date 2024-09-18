@@ -9,6 +9,7 @@
       efiInstallAsRemovable = false;
       device = "nodev";
       fsIdentifier = "uuid";
+      useOSProber = true;
     };
   };
 }

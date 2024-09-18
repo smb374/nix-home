@@ -22,6 +22,7 @@
       #   echo "Hello, ${config.home.username}!"
       # '')
       brightnessctl
+      brave
       bun
       cachix
       (catppuccin-kvantum.override {
@@ -33,6 +34,7 @@
       gcc
       gnumake
       gnutar
+      grim
       gtklock
       hyprpaper
       light
@@ -41,6 +43,7 @@
       nodejs
       python3
       unzip
+      usbutils
       sassc
       slurp
       trash-cli

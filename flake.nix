@@ -70,6 +70,15 @@
           extraModules = [ ./os/modules/greetd-hyprland.nix ];
           bootLoader = "systemd";
         };
+        nixosConfigurations."smb374-nix-desktop" = myLib.generalOs {
+          device = "/dev/nvme0n1";
+          extraModules = [
+            ./os/modules/sddm.nix
+            ./os/modules/swayfx.nix
+          ];
+          bootLoader = "grub";
+          timeZone = "US/Eastern";
+        };
       };
     };
 }

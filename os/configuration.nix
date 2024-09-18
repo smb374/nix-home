@@ -26,15 +26,35 @@
   console = { keyMap = "us"; };
 
   environment.systemPackages = with pkgs; [
-    catppuccin-sddm-corners
     curl
-    greetd.tuigreet
+    fd
+    gcc
+    git
+    gnutar
     qogir-icon-theme
+    unzip
     vim
     wget
+    yubikey-personalization
+  ];
+  services.udev.packages = with pkgs; [
+    yubikey-personalization
   ];
 
-  hardware.opengl.enable = true;
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      lxgw-wenkai-tc
+    ];
+    fontconfig.defaultFonts = {
+      serif = [ "Noto Serif CJK TC" "Noto Serif" ];
+      sansSerif = [ "Noto Sans CJK TC" "Noto Sans" ];
+    };
+  };
+
+  hardware.graphics.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -55,7 +75,7 @@
       enableBrowserSocket = true;
       enableExtraSocket = true;
       enableSSHSupport = true;
-      pinentryFlavor = "curses";
+      pinentryPackage = pkgs.pinentry-gnome3;
     };
     htop.enable = true;
     mtr.enable = true;
@@ -113,6 +133,9 @@
   security = {
     rtkit.enable = true;
     polkit.enable = true;
+    pam.loginLimits = [
+      { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
+    ];
   };
   services = {
     openssh.enable = true;
@@ -128,9 +151,6 @@
     };
     yubikey-agent.enable = true;
   };
-  sound.enable = true;
-
-  time.timeZone = "Asia/Taipei";
 
   users = {
     users.poyehchen = {
@@ -145,6 +165,6 @@
     };
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
 

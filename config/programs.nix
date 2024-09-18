@@ -4,13 +4,14 @@
   imports = [
     ./programs.nix.d/ags.nix
     ./programs.nix.d/cava.nix
-    ./programs.nix.d/firefox.nix
+    # ./programs.nix.d/firefox.nix
     ./programs.nix.d/fish.nix
     ./programs.nix.d/foot.nix
     ./programs.nix.d/gpg.nix
     ./programs.nix.d/lazygit.nix
     ./programs.nix.d/rofi.nix
     ./programs.nix.d/tmux.nix
+    ./programs.nix.d/waybar.nix
   ];
   programs = {
     direnv = {
@@ -19,7 +20,6 @@
     };
     eza = {
       enable = true;
-      enableAliases = true;
       extraOptions = [ "--color=always" "-h" ];
     };
     fzf = {

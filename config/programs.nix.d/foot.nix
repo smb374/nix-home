@@ -5,7 +5,7 @@
     enable = true;
     settings = {
       main = {
-        term = "foot-extra";
+        term = "xterm-256color";
         font =
           "JetBrainsMono NF:pixelsize=22, Noto Sans CJK JP:pixelsize=22, Noto Sans CJK TC:pixelsize=22";
         dpi-aware = true;

@@ -4,11 +4,11 @@
   imports = [
     ./config/file.nix
     ./config/gtk.nix
-    ./config/hyprland.nix
+    # ./config/hyprland.nix
     ./config/i18n.nix
     ./config/packages.nix
     ./config/programs.nix
-    ./config/qt.nix
+    # ./config/qt.nix
     ./config/services.nix
     ./config/variables.nix
     ./config/xdg.nix
@@ -25,7 +25,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
+  home.stateVersion = "24.05"; # Please read the comment before changing.
   home.pointerCursor = {
     gtk.enable = true;
     name = "Qogir-dark";

@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [ ./services.nix.d/dunst.nix ];
@@ -9,7 +9,7 @@
       enableExtraSocket = true;
       enableScDaemon = true;
       enableSshSupport = true;
-      pinentryFlavor = "qt";
+      pinentryPackage = pkgs.pinentry-gnome3;
     };
   };
 }

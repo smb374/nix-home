@@ -14,7 +14,7 @@
         (pkgs.catppuccin-papirus-folders.override { accent = "lavender"; });
     };
     theme = {
-      name = "Catppuccin-Mocha-Standard-Lavender-Dark";
+      name = "catppuccin-mocha-lavender-standard";
       package = (pkgs.catppuccin-gtk.override {
         accents = [ "blue" "lavender" ];
         variant = "mocha";

@@ -12,12 +12,24 @@
         hash = "sha256-zmEa/GJ9jtjzeyJUWVNSz/wYrU2FtqhcHdgxzi6ANHg=";
       };
     }];
+    # shellInit = ''
+    #   # hydro prompt
+    #   set -g hydro_symbol_prompt ">"
+    #   set -g hydro_color_pwd $fish_color_cwd
+    #   set -g hydro_color_git $fish_color_quote
+    #   set -g hydro_color_prompt $fish_color_normal
+    #   set -g hydro_color_duration $fish_color_user
+    # '';
     shellInit = ''
+      # gpg tty setting
       if [ "$GPG_TTY" != (tty | string collect; or echo) ]
           set GPG_TTY (tty | string collect; or echo)
           set -gx GPG_TTY $GPG_TTY
           gpg-connect-agent updatestartuptty /bye >/dev/null
       end
+      # gpg ssh agent
+      gpg-connect-agent /bye
+      set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
       # hydro prompt
       set -g hydro_symbol_prompt ">"
       set -g hydro_color_pwd $fish_color_cwd
