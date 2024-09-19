@@ -6,12 +6,13 @@
     settings = {
       main = {
         term = "xterm-256color";
-        font =
-          "JetBrainsMono NF:pixelsize=22, Noto Sans CJK JP:pixelsize=22, Noto Sans CJK TC:pixelsize=22";
+        font = "JetBrainsMono NF:pixelsize=22, Noto Sans CJK JP:pixelsize=22, Noto Sans CJK TC:pixelsize=22";
         dpi-aware = true;
         pad = "5x5 center";
       };
-      cursor = { color = "1e2e2e cdd6f4"; };
+      cursor = {
+        color = "1e2e2e cdd6f4";
+      };
       colors = {
         foreground = "cdd6f4"; # Text
         background = "1e1e2e"; # Base

@@ -1,15 +1,25 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   home = config.home.homeDirectory;
-  hyprlandRoot = "${home}/.config/hypr";
-  workspaceKeys = lib.lists.concatMap (i:
-    let x = builtins.toString i;
-    in [
+  hyprland_root = "${home}/.config/hypr";
+  workspaceKeys = lib.lists.concatMap (
+    i:
+    let
+      x = builtins.toString i;
+    in
+    [
       "$mainMod, ${x}, workspace, ${x}"
       "$mainMod SHIFT, ${x}, movetoworkspace, ${x}"
-    ]) (lib.lists.range 1 9);
+    ]
+  ) (lib.lists.range 1 9);
   floatRule = type: expr: "float,${type}:${expr}";
-in {
+in
+{
   home.packages = with pkgs; [
     hypridle
     hyprlock
@@ -23,11 +33,13 @@ in {
         ",1920x1080@60,0x0,1"
       ];
       env = [
-        "HYPRLAND_ROOT,${hyprlandRoot}"
-        "SCRIPT_ROOT,${hyprlandRoot}/scripts"
-        "AGS_CONFIG,${hyprlandRoot}/ags/config.js"
-        "ROFI_ROOT,${hyprlandRoot}/rofi"
+        "HYPRLAND_ROOT,${hyprland_root}"
+        "SCRIPT_ROOT,${hyprland_root}/scripts"
+        "AGS_CONFIG,${hyprland_root}/ags/config.js"
+        "ROFI_ROOT,${hyprland_root}/rofi"
         "WLR_NO_HARDWARE_CURSORS,1"
+        "QT_QPA_PLATFORM,wayland;xcb"
+        "QT_QPA_PLATFORMTHEME,qt5ct"
       ];
       exec-once = [
         "hyprpaper"
@@ -42,7 +54,9 @@ in {
       input = {
         kb_layout = "us";
         follow_mouse = 1;
-        touchpad = { natural_scroll = false; };
+        touchpad = {
+          natural_scroll = false;
+        };
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
         repeat_rate = 50;
         repeat_delay = 150;
@@ -84,22 +98,29 @@ in {
         pseudotile = true;
         preserve_split = true;
       };
-      gestures = { workspace_swipe = "off"; };
+      gestures = {
+        workspace_swipe = "off";
+      };
       misc = {
         mouse_move_enables_dpms = true;
         key_press_enables_dpms = true;
       };
-      xwayland = { force_zero_scaling = true; };
-      windowrulev2 = (builtins.map (x: floatRule "class" x) [
-        "(float-term)"
-        "(music)"
-        "(imv)"
-        "(mpv)"
-      ]) ++ (builtins.map (x: floatRule "title" x) [
-        "(rmpd)"
-        "(rmpc)"
-        "(PyLNP)"
-      ]) ++ [ "size 1000 500,class:(music)" ];
+      xwayland = {
+        force_zero_scaling = true;
+      };
+      windowrulev2 =
+        (builtins.map (x: floatRule "class" x) [
+          "(float-term)"
+          "(music)"
+          "(imv)"
+          "(mpv)"
+        ])
+        ++ (builtins.map (x: floatRule "title" x) [
+          "(rmpd)"
+          "(rmpc)"
+          "(PyLNP)"
+        ])
+        ++ [ "size 1000 500,class:(music)" ];
       # Keybindings
       "$mainMod" = "SUPER";
       bind = [

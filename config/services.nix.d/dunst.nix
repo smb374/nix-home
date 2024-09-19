@@ -5,8 +5,7 @@
     enable = true;
     iconTheme = {
       name = "Papirus-Dark";
-      package =
-        (pkgs.catppuccin-papirus-folders.override { accent = "lavender"; });
+      package = (pkgs.catppuccin-papirus-folders.override { accent = "lavender"; });
     };
     settings = {
       global = {

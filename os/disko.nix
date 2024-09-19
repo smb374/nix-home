@@ -2,7 +2,8 @@
 
 let
   cfg = config.os.disko;
-in {
+in
+{
   options = {
     os.disko.device = lib.mkOption { default = "/dev/sda"; };
   };
@@ -43,7 +44,10 @@ in {
                   };
                   "/nix" = {
                     mountpoint = "/nix";
-                    mountOptions = [ "compress=zstd" "noatime" ];
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                   "/swap" = {
                     mountpoint = "/.swap";

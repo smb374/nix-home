@@ -6,7 +6,8 @@ let
     standard_dialogs = "gtk3";
     style = "kvantum-dark";
   };
-in {
+in
+{
   imports = [
     ./xdg.nix.d/configfiles/hyprland.nix
     ./xdg.nix.d/portal.nix
@@ -14,8 +15,7 @@ in {
   xdg = {
     enable = true;
     configFile = {
-      "fish/themes/Catppuccin Mocha.theme".source =
-        ./sources/fish/catppuccin_mocha.theme;
+      "fish/themes/Catppuccin Mocha.theme".source = ./sources/fish/catppuccin_mocha.theme;
       # "Kvantum/kvantum.kvconfig".source =
       #   (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
       #     General.theme = "Catppuccin-Mocha-Lavender";

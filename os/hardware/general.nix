@@ -1,14 +1,35 @@
-{ config, lib, modulesPath, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
-  boot.initrd.availableKernelModules =
-    [ "nvme" "ahci" "sd_mod" "sr_mod" "uas" "usb_storage" "usbhid" "xhci_pci" ];
-  boot.initrd.kernelModules =
-    [ "nvme" "ahci" "sd_mod" "sr_mod" "uas" "usb_storage" "usbhid" "xhci_pci" ];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "ahci"
+    "sd_mod"
+    "sr_mod"
+    "uas"
+    "usb_storage"
+    "usbhid"
+    "xhci_pci"
+  ];
+  boot.initrd.kernelModules = [
+    "nvme"
+    "ahci"
+    "sd_mod"
+    "sr_mod"
+    "uas"
+    "usb_storage"
+    "usbhid"
+    "xhci_pci"
+  ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.kernelParams = [ "boot.shell_on_fail" ];
   boot.extraModulePackages = [ ];

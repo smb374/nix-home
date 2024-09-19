@@ -5,7 +5,10 @@
     enable = true;
     settings = {
       gui.theme = {
-        activeBorderColor = [ "#b4befe" "bold" ];
+        activeBorderColor = [
+          "#b4befe"
+          "bold"
+        ];
         inactiveBorderColor = [ "#a6adc8" ];
         optionsTextColor = [ "#89b4fa" ];
         selectedLineBgColor = [ "#313244" ];

@@ -35,7 +35,11 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
-[*.{js,ts,el,emacs}]
+[*.{el,emacs}]
+indent_style = space
+indent_size = 2
+
+[*.{js,ts,jsx,tsx}]
 indent_style = space
 indent_size = 2
 

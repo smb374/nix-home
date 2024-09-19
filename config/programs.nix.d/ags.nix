@@ -3,6 +3,10 @@
 {
   programs.ags = {
     enable = true;
-    extraPackages = with pkgs; [ gtksourceview webkitgtk accountsservice ];
+    extraPackages = with pkgs; [
+      gtksourceview
+      webkitgtk
+      accountsservice
+    ];
   };
 }

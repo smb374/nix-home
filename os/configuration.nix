@@ -9,12 +9,18 @@
   # Enable flakes.
   nix.settings = {
     accept-flake-config = true;
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     extra-substituters = [ "https://nix-community.cachix.org" ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
-    trusted-users = [ "root" "poyehchen" ];
+    trusted-users = [
+      "root"
+      "poyehchen"
+    ];
   };
   # Allow Unfree
   nixpkgs.config.allowUnfree = true;
@@ -23,7 +29,9 @@
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-  console = { keyMap = "us"; };
+  console = {
+    keyMap = "us";
+  };
 
   environment.systemPackages = with pkgs; [
     curl
@@ -51,8 +59,14 @@
       lxgw-wenkai-tc
     ];
     fontconfig.defaultFonts = {
-      serif = [ "Noto Serif CJK TC" "Noto Serif" ];
-      sansSerif = [ "Noto Sans CJK TC" "Noto Sans" ];
+      serif = [
+        "Noto Serif CJK TC"
+        "Noto Serif"
+      ];
+      sansSerif = [
+        "Noto Sans CJK TC"
+        "Noto Sans"
+      ];
     };
   };
 
@@ -63,7 +77,12 @@
   networking = {
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 80 443 8080 ];
+      allowedTCPPorts = [
+        22
+        80
+        443
+        8080
+      ];
     };
     hostName = "smb374-nix";
     networkmanager.enable = true;
@@ -136,7 +155,12 @@
     rtkit.enable = true;
     polkit.enable = true;
     pam.loginLimits = [
-      { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
+      {
+        domain = "@users";
+        item = "rtprio";
+        type = "-";
+        value = 1;
+      }
     ];
   };
   services = {
@@ -157,9 +181,12 @@
 
   users = {
     users.poyehchen = {
-      extraGroups = [ "audio" "video" "wheel" ];
-      hashedPassword =
-        "$y$j9T$YLbNr7cW0qMP8T/0LKDd.1$f81OosH6ml9XqYKa7lAfgViVTybHcj/.dQR2UQTa.v2";
+      extraGroups = [
+        "audio"
+        "video"
+        "wheel"
+      ];
+      hashedPassword = "$y$j9T$YLbNr7cW0qMP8T/0LKDd.1$f81OosH6ml9XqYKa7lAfgViVTybHcj/.dQR2UQTa.v2";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINcjZwi+gFwxNcVnt9i+M+Gyxm0FKGYD3wIn+BEW0pdQ cardno:14_352_902"
@@ -170,4 +197,3 @@
 
   system.stateVersion = "24.05";
 }
-

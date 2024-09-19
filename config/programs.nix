@@ -21,7 +21,10 @@
     };
     eza = {
       enable = true;
-      extraOptions = [ "--color=always" "-h" ];
+      extraOptions = [
+        "--color=always"
+        "-h"
+      ];
     };
     fzf = {
       enable = true;
