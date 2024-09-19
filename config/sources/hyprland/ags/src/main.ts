@@ -3,6 +3,7 @@ import Info from "./info";
 import Workspace from "./workspace";
 import Systray from "./systray";
 import Gtk from "gi://Gtk?version=3.0";
+import Weather from "./services/weather";
 
 // layout of the bar
 const Left = () => Widget.Box({
@@ -48,10 +49,12 @@ const Bar = (monitor: number) => Widget.Window({
 })
 
 const scss = App.configDir + "/style/style.scss";
-const css = "/tmp/ags/style.css";
+const css = App.configDir + "/style/style.css";
 
 Utils.exec(`sassc ${scss} ${css}`);
 
+// Weather.connect("weather-changed", () => console.log(Weather.realtime));
+//
 // exporting the config so ags can manage the windows
 export default {
   style: css,

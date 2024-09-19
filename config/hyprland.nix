@@ -1,7 +1,5 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
-  # NOTE: Check monitor name.
-  monitor = "eDP-1";
   home = config.home.homeDirectory;
   hyprlandRoot = "${home}/.config/hypr";
   workspaceKeys = lib.lists.concatMap (i:
@@ -12,15 +10,17 @@ let
     ]) (lib.lists.range 1 9);
   floatRule = type: expr: "float,${type}:${expr}";
 in {
+  home.packages = with pkgs; [
+    hypridle
+    hyprlock
+    hyprpaper
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    plugins = [ ];
     settings = {
-      # NOTE: Check monitor name.
       monitor = [
-        "${monitor},1920x1080@60,0x0,1"
-        ",preferred,auto,1,mirror,${monitor}"
+        ",1920x1080@60,0x0,1"
       ];
       env = [
         "HYPRLAND_ROOT,${hyprlandRoot}"
@@ -33,9 +33,10 @@ in {
         "hyprpaper"
         "fcitx5"
         "dunst"
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-        "ags -c $AGS_CONFIG"
+        # "ags -c $AGS_CONFIG"
       ];
       exec = [ ];
       input = {
@@ -44,7 +45,7 @@ in {
         touchpad = { natural_scroll = false; };
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
         repeat_rate = 50;
-        repeat_delay = 200;
+        repeat_delay = 150;
       };
       general = {
         gaps_in = 5;
@@ -83,7 +84,6 @@ in {
         pseudotile = true;
         preserve_split = true;
       };
-      master = { new_is_master = true; };
       gestures = { workspace_swipe = "off"; };
       misc = {
         mouse_move_enables_dpms = true;
@@ -136,16 +136,13 @@ in {
         ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-"
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
+        # OBS stuff
+        "CTRL, F10, pass, ^(com\.obsproject\.Studio)$"
+        "CTRL SHIFT, F10, pass, ^(com\.obsproject\.Studio)$"
+
         # screenshot
         ", PRINT, exec, $SCRIPT_ROOT/screenshot"
         "CTRL, PRINT, exec, $SCRIPT_ROOT/screenshot select"
-
-        # TODO: MPD
-        # "$mainMod ALT, M, exec, foot -a music -o colors.alpha=1.0 ncmpcpp"
-        # "$mainMod, SPACE, exec, mpc toggle"
-        # ", XF86AudioPlay, exec, mpc -q toggle"
-        # ", XF86AudioPrev, exec, mpc -q prev"
-        # ", XF86AudioNext, exec, mpc -q next"
       ] ++ workspaceKeys;
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging

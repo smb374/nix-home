@@ -4,7 +4,7 @@
   imports = [
     ./config/file.nix
     ./config/gtk.nix
-    # ./config/hyprland.nix
+    ./config/hyprland.nix
     ./config/i18n.nix
     ./config/packages.nix
     ./config/programs.nix
@@ -49,6 +49,15 @@
       extra-trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      ];
+    };
+  };
+  dconf.settings = {
+    "org/gnome/shell" = {
+      disable-user-extensions = false;
+      enabled-extensions = with pkgs.gnomeExtensions; [
+        blur-my-shell.extensionUuid
+        # gsconnect.extensionUuid
       ];
     };
   };

@@ -54,6 +54,7 @@
       wayshot
       wl-clipboard
       zig
+      zoxide
     ] ++ [
       # Fonts
       jetbrains-mono

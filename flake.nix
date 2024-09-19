@@ -74,8 +74,8 @@
           device = "/dev/nvme0n1";
           extraModules = [
             ./os/modules/sddm.nix
-            ./os/modules/swayfx.nix
             ./os/modules/nvidia.nix
+            ./os/modules/hyprland.nix
           ];
           bootLoader = "grub";
           timeZone = "US/Eastern";

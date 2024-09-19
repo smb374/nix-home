@@ -66,7 +66,7 @@ let
     "$logout")
         ans=$(confirm_exit)
         if [[ "$ans" == "$yes" ]]; then
-            swaymsg exit
+            hyprctl dispatch exit
         else
             exit
         fi
