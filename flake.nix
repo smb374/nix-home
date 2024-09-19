@@ -75,6 +75,7 @@
           extraModules = [
             ./os/modules/sddm.nix
             ./os/modules/swayfx.nix
+            ./os/modules/nvidia.nix
           ];
           bootLoader = "grub";
           timeZone = "US/Eastern";

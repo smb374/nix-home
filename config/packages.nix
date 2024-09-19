@@ -38,9 +38,12 @@
       gtklock
       hyprpaper
       light
+      lxqt.pavucontrol-qt
       nil
       nix-prefetch
+      nixfmt-rfc-style
       nodejs
+      polkit_gnome
       python3
       unzip
       usbutils

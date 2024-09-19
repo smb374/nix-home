@@ -31,8 +31,10 @@
     gcc
     git
     gnutar
+    pciutils
     qogir-icon-theme
     unzip
+    usbutils
     vim
     wget
     yubikey-personalization
@@ -149,6 +151,7 @@
       pulse.enable = true;
       wireplumber.enable = true;
     };
+    udisks2.enable = true;
     yubikey-agent.enable = true;
   };
 

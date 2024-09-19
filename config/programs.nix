@@ -10,6 +10,7 @@
     ./programs.nix.d/gpg.nix
     ./programs.nix.d/lazygit.nix
     ./programs.nix.d/rofi.nix
+    ./programs.nix.d/sway.nix
     ./programs.nix.d/tmux.nix
     ./programs.nix.d/waybar.nix
   ];
