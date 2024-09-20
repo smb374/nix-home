@@ -35,11 +35,13 @@
 
   environment.systemPackages = with pkgs; [
     curl
+    docker-compose
     fd
     gcc
     git
     gnutar
     pciutils
+    qemu_full
     qogir-icon-theme
     unzip
     usbutils
@@ -179,12 +181,22 @@
     yubikey-agent.enable = true;
   };
 
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "btrfs";
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   users = {
     users.poyehchen = {
       extraGroups = [
         "audio"
         "video"
         "wheel"
+        "docker"
       ];
       hashedPassword = "$y$j9T$YLbNr7cW0qMP8T/0LKDd.1$f81OosH6ml9XqYKa7lAfgViVTybHcj/.dQR2UQTa.v2";
       isNormalUser = true;

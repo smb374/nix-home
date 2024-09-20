@@ -37,13 +37,17 @@
       gnutar
       grim
       gtklock
-      hyprpaper
+      imagemagick
+      killall
       light
       lxqt.pavucontrol-qt
+      mpc-cli
       nil
       nix-prefetch
       nixfmt-rfc-style
+      networkmanagerapplet
       nodejs
+      pcmanfm
       polkit_gnome
       python3
       unzip

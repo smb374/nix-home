@@ -44,13 +44,15 @@ in
       exec-once = [
         "hyprpaper"
         "fcitx5"
+        "nm-applet"
         "dunst"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-        # "ags -c $AGS_CONFIG"
       ];
-      exec = [ ];
+      exec = [
+        "ags -q; ags"
+      ];
       input = {
         kb_layout = "us";
         follow_mouse = 1;
@@ -114,11 +116,13 @@ in
           "(music)"
           "(imv)"
           "(mpv)"
+          "^(waydroid\..*)$"
         ])
         ++ (builtins.map (x: floatRule "title" x) [
           "(rmpd)"
           "(rmpc)"
           "(PyLNP)"
+          "(Waydroid)"
         ])
         ++ [ "size 1000 500,class:(music)" ];
       # Keybindings
@@ -129,6 +133,7 @@ in
         "$mainMod SHIFT, RETURN, exec, foot -a float-term"
         "$mainMod SHIFT, Q, killactive"
         "$mainMod SHIFT, F, togglefloating"
+        "$mainMod SHIFT, R, exec, hyprctl reload"
         "$mainMod, F, fullscreen, 0"
         "$mainMod, P, pseudo"
         "$mainMod, J, togglesplit"
@@ -160,6 +165,13 @@ in
         # OBS stuff
         "CTRL, F10, pass, ^(com\.obsproject\.Studio)$"
         "CTRL SHIFT, F10, pass, ^(com\.obsproject\.Studio)$"
+
+        # MPD
+        "SUPER ALT, M, exec, foot -a music -o colors.alpha=1.0 ncmpcpp"
+        "SUPER, SPACE, exec, mpc -q toggle"
+        ", XF86AudioPlay, exec, mpc -q toggle"
+        ", XF86AudioPrev, exec, mpc -q prev"
+        ", XF86AudioNext, exec, mpc -q next"
 
         # screenshot
         ", PRINT, exec, $SCRIPT_ROOT/screenshot"

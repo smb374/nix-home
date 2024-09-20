@@ -15,6 +15,7 @@
     ./programs.nix.d/waybar.nix
   ];
   programs = {
+    bun.enable = true;
     direnv = {
       enable = true;
       nix-direnv.enable = true;
