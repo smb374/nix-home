@@ -7,6 +7,7 @@
       fcitx5-rime
       fcitx5-gtk
       kdePackages.fcitx5-qt
+      catppuccin-fcitx5
     ];
   };
 }

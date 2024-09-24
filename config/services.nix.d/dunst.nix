@@ -9,11 +9,13 @@
     };
     settings = {
       global = {
-        width = "(0, 500)";
+        width = "(0, 600)";
         offset = "30x30";
         notification_limit = 0;
         progress_bar_corner_radius = 0;
-        icon_corner_radius = 0;
+        icon_corner_radius = 5;
+        min_icon_size = 32;
+        max_icon_size = 64;
         separator_height = 3;
         padding = 10;
         horizontal_padding = 10;

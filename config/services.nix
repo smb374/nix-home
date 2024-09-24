@@ -14,5 +14,9 @@
       enableSshSupport = true;
       pinentryPackage = pkgs.pinentry-gnome3;
     };
+    syncthing = {
+      enable = true;
+      tray.enable = true;
+    };
   };
 }

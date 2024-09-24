@@ -31,14 +31,21 @@
         variant = "Mocha";
       })
       dogdns
+      fastfetch
       fd
+      floorp
       gcc
+      (pkgs.writeShellScriptBin "gdb" ''
+        ${pkgs.gef}/bin/gef "$@"
+      '')
+      gef
       gnumake
       gnutar
       grim
       gtklock
       imagemagick
       killall
+      libsForQt5.okular
       light
       lxqt.pavucontrol-qt
       mpc-cli
@@ -46,20 +53,28 @@
       nix-prefetch
       nixfmt-rfc-style
       networkmanagerapplet
+      nmon
       nodejs
       pcmanfm
+      pfetch-rs
       polkit_gnome
       python3
       unzip
       usbutils
       sassc
       slurp
+      sysstat
       trash-cli
       tree-sitter
+      typst
       wayshot
       wl-clipboard
       zig
       zoxide
+    ]
+    ++ [
+      # Custom packages
+      (pkgs.callPackage ./packages.nix.d/fetch.nix { })
     ]
     ++ [
       # Fonts
@@ -73,5 +88,6 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
+      stix-two
     ];
 }
