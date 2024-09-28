@@ -20,11 +20,9 @@ let
   floatRule = type: expr: "float,${type}:${expr}";
 in
 {
-  home.packages = with pkgs; [
-    hypridle
-    hyprlock
-    hyprpaper
-  ];
+  programs.hyprlock.enable = true;
+  services.hypridle.enable = true;
+  services.hyprpaper.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -42,7 +40,6 @@ in
         "QT_QPA_PLATFORMTHEME,qt5ct"
       ];
       exec-once = [
-        "hyprpaper"
         "fcitx5"
         "nm-applet"
         "dunst"

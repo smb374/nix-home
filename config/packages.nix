@@ -35,10 +35,7 @@
       fd
       floorp
       gcc
-      (pkgs.writeShellScriptBin "gdb" ''
-        ${pkgs.gef}/bin/gef "$@"
-      '')
-      gef
+      gdb
       gnumake
       gnutar
       grim
@@ -62,7 +59,9 @@
       unzip
       usbutils
       sassc
+      showmethekey
       slurp
+      sshfs
       sysstat
       trash-cli
       tree-sitter
@@ -70,6 +69,7 @@
       wayshot
       wl-clipboard
       zig
+      zip
       zoxide
     ]
     ++ [

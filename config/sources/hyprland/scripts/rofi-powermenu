@@ -47,13 +47,13 @@ case $chosen in
     fi
     ;;
 "$lock")
-    hyprlock
+    loginctl lock-session
     ;;
 "$suspend")
     ans=$(confirm_exit)
     if [[ "$ans" == "$yes" ]]; then
         mpc -q pause
-        hyprlock
+        loginctl lock-session
         systemctl suspend
     else
         exit

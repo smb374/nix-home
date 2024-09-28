@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -15,5 +15,12 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".editorconfig".source = ./sources/editorconfig;
+    ".gdbinit-gef.py".source = pkgs.fetchurl {
+      url = "https://gef.blah.cat/py";
+      hash = "sha256-5KeFPoTYeoikabuNLJ+GP+IR5eQ1NTFMA0SlqYvXEuU=";
+    };
+    ".gdbinit".text = ''
+      source ~/.gdbinit-gef.py
+    '';
   };
 }

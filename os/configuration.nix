@@ -28,6 +28,9 @@
   # Settings
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.extraModprobeConfig = ''
+    options hid_apple fnmode=0
+  '';
 
   console = {
     keyMap = "us";
@@ -37,6 +40,7 @@
     curl
     docker-compose
     fd
+    file
     gcc
     git
     gnutar
