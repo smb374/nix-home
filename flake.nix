@@ -97,6 +97,7 @@
           nixosConfigurations."smb374-nix-desktop" = myLib.generalOs {
             device = "/dev/nvme0n1";
             extraModules = [
+              ./os/hardware/bluetooth.nix
               ./os/modules/sddm.nix
               ./os/modules/nvidia.nix
               ./os/modules/hyprland.nix

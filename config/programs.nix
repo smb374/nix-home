@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -37,11 +37,20 @@
       delta.enable = true;
       userName = "Po-Yeh Chen";
       userEmail = "poyehchen@cs.nycu.edu.tw";
+      signing = {
+        key = "0A507FC2325D77EA";
+        signByDefault = true;
+      };
     };
     imv.enable = true;
+    java.enable = true;
     jq.enable = true;
     lf.enable = true;
     neovim.enable = true;
     ripgrep.enable = true;
+    sagemath = {
+      enable = true;
+      package = pkgs.sageWithDoc;
+    };
   };
 }

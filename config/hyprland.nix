@@ -28,7 +28,7 @@ in
     xwayland.enable = true;
     settings = {
       monitor = [
-        ",1920x1080@60,0x0,1"
+        "DP-1,1920x1080@165.00,0x0,1"
       ];
       env = [
         "HYPRLAND_ROOT,${hyprland_root}"
@@ -37,7 +37,7 @@ in
         "ROFI_ROOT,${hyprland_root}/rofi"
         "WLR_NO_HARDWARE_CURSORS,1"
         "QT_QPA_PLATFORM,wayland;xcb"
-        "QT_QPA_PLATFORMTHEME,qt5ct"
+        # "QT_QPA_PLATFORMTHEME,qt5ct"
       ];
       exec-once = [
         "fcitx5"
@@ -59,6 +59,9 @@ in
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
         repeat_rate = 50;
         repeat_delay = 150;
+      };
+      cursor = {
+        no_hardware_cursors = true;
       };
       general = {
         gaps_in = 5;

@@ -53,6 +53,7 @@
       ];
     };
   };
+  nixpkgs.config.allowUnfree = true;
   dconf.settings = {
     "org/gnome/shell" = {
       disable-user-extensions = false;
