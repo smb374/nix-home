@@ -1,21 +1,12 @@
 { pkgs, ... }:
-let
-  qtctAppearance = {
-    custom_palette = false;
-    icon_theme = "Papirus-Dark";
-    standard_dialogs = "gtk3";
-    style = "kvantum-dark";
-  };
-in
 {
-  imports = [
-    ./xdg.nix.d/configfiles/hyprland.nix
-    ./xdg.nix.d/portal.nix
-  ];
-  xdg = {
+  xdg.enable = true;
+  xdg.portal = {
     enable = true;
-    configFile = {
-      "fish/themes/Catppuccin Mocha.theme".source = ./sources/fish/catppuccin_mocha.theme;
-    };
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+    ];
+    config.common.default = "*";
   };
 }

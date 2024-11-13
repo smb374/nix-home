@@ -23,6 +23,11 @@ in
   programs.hyprlock.enable = true;
   services.hypridle.enable = true;
   services.hyprpaper.enable = true;
+  home.packages = with pkgs; [
+    hyprpanel
+    hyprpicker
+    hyprpolkitagent
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -33,22 +38,16 @@ in
       env = [
         "HYPRLAND_ROOT,${hyprland_root}"
         "SCRIPT_ROOT,${hyprland_root}/scripts"
-        "AGS_CONFIG,${hyprland_root}/ags/config.js"
         "ROFI_ROOT,${hyprland_root}/rofi"
         "WLR_NO_HARDWARE_CURSORS,1"
         "QT_QPA_PLATFORM,wayland;xcb"
-        # "QT_QPA_PLATFORMTHEME,qt5ct"
       ];
       exec-once = [
         "fcitx5"
-        "nm-applet"
-        "dunst"
-        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+        "hyprpanel"
+        "systemctl --user start hyprpolkitagent"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-      ];
-      exec = [
-        "ags -q; ags"
       ];
       input = {
         kb_layout = "us";
@@ -58,7 +57,7 @@ in
         };
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
         repeat_rate = 50;
-        repeat_delay = 150;
+        repeat_delay = 200;
       };
       cursor = {
         no_hardware_cursors = true;
@@ -182,6 +181,28 @@ in
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
+    };
+  };
+  xdg.configFile = {
+    "hypr/rofi" = {
+      source = ./sources/hyprland/rofi;
+      recursive = true;
+    };
+    "hypr/scripts" = {
+      source = ./sources/hyprland/scripts;
+      recursive = true;
+    };
+    "hypr/hypridle.conf" = {
+      source = ./sources/hyprland/hypridle.conf;
+    };
+    "hypr/hyprpaper.conf" = {
+      source = ./sources/hyprland/hyprpaper.conf;
+    };
+    "hypr/hyprlock.conf" = {
+      source = ./sources/hyprland/hyprlock.conf;
+    };
+    "hypr/conf.d/mocha.color.conf" = {
+      source = ./sources/hyprland/mocha.color.conf;
     };
   };
 }

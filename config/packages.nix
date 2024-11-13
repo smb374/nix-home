@@ -10,8 +10,10 @@
       brave
       bun
       cachix
+      cargo
       discord
       dogdns
+      eslint
       fastfetch
       fd
       floorp
@@ -29,10 +31,11 @@
       libsForQt5.qtstyleplugin-kvantum
       libsForQt5.okular
       light
-      pavucontrol
+      lxqt.pavucontrol-qt
       mpc-cli
       nil
       nix-prefetch
+      nix-prefetch-github
       nixfmt-rfc-style
       networkmanagerapplet
       nmon
@@ -40,13 +43,13 @@
       nosql-workbench
       pcmanfm
       pfetch-rs
-      polkit_gnome
       poppler_utils
       (python3.withPackages (pp: [
         pp.numpy
         pp.pandas
         pp.pwntools
       ]))
+      rustc
       unzip
       usbutils
       sassc

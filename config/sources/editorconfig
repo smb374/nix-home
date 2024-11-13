@@ -45,7 +45,7 @@ indent_size = 2
 
 [*.{html,xml,css,scss,svelte}]
 indent_style = space
-indent_size = 4
+indent_size = 2
 
 [*.{lua,fnl}]
 indent_style = space

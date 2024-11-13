@@ -21,15 +21,17 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     # Other inputs
-    ags = {
-      url = "github:Aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # ags = {
+    #   url = "github:Aylur/ags";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    catppuccin.url = "github:catppuccin/nix";
     devenv.url = "tarball+https://install.devenv.sh/latest";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
   };
 
   outputs =
@@ -37,9 +39,11 @@
       nixpkgs,
       home-manager,
       flake-parts,
-      ags,
+      # ags,
+      catppuccin,
       devenv,
       disko,
+      hyprpanel,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -64,7 +68,6 @@
       flake =
         let
           system = "x86_64-linux";
-          pkgs = nixpkgs.legacyPackages.${system};
           devenv' = devenv.outputs.packages.${system}.default;
           myLib = import ./lib {
             inherit (nixpkgs) lib;
@@ -73,13 +76,22 @@
         in
         {
           homeConfigurations."poyehchen" = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
+            pkgs = import nixpkgs {
+              inherit system;
+              overlays = [
+                inputs.hyprpanel.overlay
+              ];
+            };
             modules = [
-              ags.homeManagerModules.default
+              # ags.homeManagerModules.default
+              catppuccin.homeManagerModules.catppuccin
               ./home.nix
               { home.packages = [ devenv' ]; }
             ];
-            extraSpecialArgs = { };
+            extraSpecialArgs = {
+              inherit system;
+              inherit inputs;
+            };
           };
           nixosConfigurations."nix-general" = myLib.generalOs {
             extraModules = [ ./os/modules/greetd-hyprland.nix ];

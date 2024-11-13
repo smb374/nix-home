@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./programs.nix.d/ags.nix
+    # ./programs.nix.d/ags.nix
     ./programs.nix.d/cava.nix
     # ./programs.nix.d/firefox.nix
     ./programs.nix.d/fish.nix
@@ -31,6 +31,10 @@
       enable = true;
       enableFishIntegration = true;
       defaultCommand = "fd -t f -H -I --exclude=.git";
+      catppuccin = {
+        enable = true;
+        accent = "lavender";
+      };
     };
     git = {
       enable = true;
@@ -51,6 +55,13 @@
     sagemath = {
       enable = true;
       package = pkgs.sageWithDoc;
+    };
+    yazi = {
+      enable = true;
+      catppuccin = {
+        enable = true;
+        accent = "lavender";
+      };
     };
   };
 }
