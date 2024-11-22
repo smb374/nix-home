@@ -27,6 +27,7 @@ in
     hyprpanel
     hyprpicker
     hyprpolkitagent
+    hyprsunset
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -41,13 +42,17 @@ in
         "ROFI_ROOT,${hyprland_root}/rofi"
         "WLR_NO_HARDWARE_CURSORS,1"
         "QT_QPA_PLATFORM,wayland;xcb"
+        "QT_QPA_PLATFORMTHEME,qt5ct"
       ];
       exec-once = [
         "fcitx5"
-        "hyprpanel"
+        # "hyprpanel"
         "systemctl --user start hyprpolkitagent"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
+      ];
+      exec = [
+        "ags quit; ags run &"
       ];
       input = {
         kb_layout = "us";
@@ -78,10 +83,12 @@ in
           passes = 2;
           new_optimizations = true;
         };
-        drop_shadow = true;
-        shadow_range = 4;
-        shadow_render_power = 3;
-        "col.shadow" = "rgba(181825ee)";
+        shadow = {
+          enabled = true;
+          range = 4;
+          render_power = 3;
+          color = "rgba(181825ee)";
+        };
       };
       animations = {
         enabled = true;
@@ -166,7 +173,7 @@ in
         "CTRL SHIFT, F10, pass, ^(com\.obsproject\.Studio)$"
 
         # MPD
-        "SUPER ALT, M, exec, foot -a music -o colors.alpha=1.0 ncmpcpp"
+        "SUPER ALT, M, exec, foot -a music -o colors.alpha=1.0 start_music"
         "SUPER, SPACE, exec, mpc -q toggle"
         ", XF86AudioPlay, exec, mpc -q toggle"
         ", XF86AudioPrev, exec, mpc -q prev"

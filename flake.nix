@@ -21,10 +21,14 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     # Other inputs
-    # ags = {
-    #   url = "github:Aylur/ags";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    ags = {
+      url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    astal = {
+      url = "github:Aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     catppuccin.url = "github:catppuccin/nix";
     devenv.url = "tarball+https://install.devenv.sh/latest";
     disko = {
@@ -32,6 +36,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    wallust.url = "git+https://codeberg.org/explosion-mental/wallust?ref=master";
   };
 
   outputs =
@@ -39,11 +45,14 @@
       nixpkgs,
       home-manager,
       flake-parts,
-      # ags,
+      ags,
+      astal,
       catppuccin,
       devenv,
       disko,
       hyprpanel,
+      neovim-nightly-overlay,
+      wallust,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -79,11 +88,12 @@
             pkgs = import nixpkgs {
               inherit system;
               overlays = [
-                inputs.hyprpanel.overlay
+                hyprpanel.overlay
+                neovim-nightly-overlay.overlays.default
               ];
             };
             modules = [
-              # ags.homeManagerModules.default
+              ags.homeManagerModules.default
               catppuccin.homeManagerModules.catppuccin
               ./home.nix
               { home.packages = [ devenv' ]; }
@@ -91,6 +101,7 @@
             extraSpecialArgs = {
               inherit system;
               inherit inputs;
+              astalPkg = astal.packages.${system};
             };
           };
           nixosConfigurations."nix-general" = myLib.generalOs {

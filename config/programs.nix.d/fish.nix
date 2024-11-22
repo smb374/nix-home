@@ -42,6 +42,15 @@
       set -g hydro_color_duration $fish_color_user
       # zoxide integration
       zoxide init fish | source
+
+      # functions
+      # function start_ueberzeug
+      #   set -l UB_PID_FILE (mktemp)
+      #   ueberzugpp layer --silent --no-stdin --use-escape-codes --pid-file "$UB_PID_FILE"
+      #   set -U UB_PID (cat "$UB_PID_FILE")
+      #   rm "$UB_PID_FILE"
+      #   set -U UB_SOCKET "/tmp/ueberzugpp-$UB_PID.socket"
+      # end
     '';
   };
 }

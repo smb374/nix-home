@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
-    # ./programs.nix.d/ags.nix
-    ./programs.nix.d/cava.nix
+    ./programs.nix.d/ags.nix
+    # ./programs.nix.d/cava.nix
     # ./programs.nix.d/firefox.nix
     ./programs.nix.d/fish.nix
     ./programs.nix.d/foot.nix
@@ -50,7 +50,13 @@
     java.enable = true;
     jq.enable = true;
     lf.enable = true;
-    neovim.enable = true;
+    neovim = {
+      enable = true;
+      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    };
+    obs-studio = {
+      enable = true;
+    };
     ripgrep.enable = true;
     sagemath = {
       enable = true;
