@@ -11,6 +11,7 @@
       bun
       cachix
       cargo
+      chromium
       discord
       dogdns
       eslint
@@ -21,21 +22,24 @@
       gcc
       gdb
       ghidra-bin
+      gimp-with-plugins
       gnumake
       gnutar
       grim
       gtklock
+      helix
       iaito
       imagemagick
+      kdePackages.okular
       kdePackages.qt6ct
       kdePackages.qtstyleplugin-kvantum
       killall
       libsForQt5.qt5ct
       libsForQt5.qtstyleplugin-kvantum
-      libsForQt5.okular
       light
       lxqt.pavucontrol-qt
       man-pages
+      marp-cli
       meld
       mpc-cli
       mpv
@@ -68,15 +72,18 @@
       sshfs
       sysstat
       themechanger
+      tinymist
       trash-cli
       tree
       tree-sitter
+      typescript-language-server
       typst
       wayshot
       wl-clipboard
       x264
       x265
       yq-go
+      zed-editor
       zig
       zip
       zoxide

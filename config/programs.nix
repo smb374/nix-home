@@ -69,5 +69,6 @@
         accent = "lavender";
       };
     };
+    zathura.enable = true;
   };
 }
