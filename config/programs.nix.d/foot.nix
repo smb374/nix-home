@@ -7,7 +7,8 @@
     settings = {
       main = {
         term = "xterm-256color";
-        font = "JetBrainsMono NF:pixelsize=22, Noto Sans CJK JP:pixelsize=22, Noto Sans CJK TC:pixelsize=22";
+        # font = "JetBrainsMono NF:pixelsize=22, Noto Sans CJK JP:pixelsize=22, Noto Sans CJK TC:pixelsize=22";
+        font = "FantasqueSansM Nerd Font:pixelsize=22, Noto Sans CJK JP:pixelsize=22, Noto Sans CJK TC:pixelsize=22";
         dpi-aware = true;
         pad = "5x5 center";
       };

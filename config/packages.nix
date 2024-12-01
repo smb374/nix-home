@@ -6,6 +6,7 @@
   home.packages =
     with pkgs;
     [
+      alacritty-theme
       brightnessctl
       brave
       bun
@@ -18,6 +19,7 @@
       fastfetch
       fd
       ffmpeg-full
+      filezilla
       floorp
       gcc
       gdb
@@ -25,6 +27,8 @@
       gimp-with-plugins
       gnumake
       gnutar
+      go
+      gopls
       grim
       gtklock
       helix
@@ -47,6 +51,7 @@
       nix-prefetch
       nix-prefetch-github
       nixfmt-rfc-style
+      nemo
       networkmanagerapplet
       nmon
       nodejs
@@ -60,8 +65,10 @@
         pp.pandas
         pp.pwntools
       ]))
+      qbittorrent
       radare2
       rustc
+      rust-analyzer
       ueberzugpp
       unzip
       usbutils
@@ -106,13 +113,11 @@
     ]
     ++ [
       # Fonts
+      fantasque-sans-mono
       jetbrains-mono
-      (nerdfonts.override {
-        fonts = [
-          "JetBrainsMono"
-          "FantasqueSansMono"
-        ];
-      })
+      nerd-fonts.fantasque-sans-mono
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.symbols-only
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif

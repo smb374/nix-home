@@ -43,6 +43,7 @@
     file
     gcc
     git
+    glib
     gnutar
     pciutils
     qemu_full
@@ -170,6 +171,7 @@
     ];
   };
   services = {
+    gvfs.enable = true;
     openssh.enable = true;
     pipewire = {
       enable = true;

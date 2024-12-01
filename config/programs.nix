@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./programs.nix.d/alacritty.nix
     ./programs.nix.d/ags.nix
     # ./programs.nix.d/cava.nix
     # ./programs.nix.d/firefox.nix
@@ -52,7 +53,7 @@
     lf.enable = true;
     neovim = {
       enable = true;
-      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+      # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     };
     obs-studio = {
       enable = true;

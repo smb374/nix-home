@@ -52,7 +52,7 @@ in
                   "/swap" = {
                     mountpoint = "/.swap";
                     mountOptions = [ "noatime" ];
-                    swap.swapfile.size = "4G";
+                    swap.swapfile.size = "32G";
                   };
                 };
               };
