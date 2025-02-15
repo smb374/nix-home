@@ -21,5 +21,6 @@
     VISUAL = "nvim";
     LESS = "-MRq -z-2 -j2";
     WLR_RENDERER_ALLOW_SOFTWARE = 1;
+    NIXOS_OZONE_WL = 1;
   };
 }

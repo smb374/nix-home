@@ -24,6 +24,8 @@ in
   services.hypridle.enable = true;
   services.hyprpaper.enable = true;
   home.packages = with pkgs; [
+    hyprland-protocols
+    hyprland-qtutils
     hyprpanel
     hyprpicker
     hyprpolkitagent
@@ -52,7 +54,8 @@ in
         "wl-paste --type image --watch cliphist store"
       ];
       exec = [
-        "ags quit; ags run &"
+        # "ags quit; ags run &"
+        "hyprpanel -q; hyprpanel"
       ];
       input = {
         kb_layout = "us";
@@ -62,7 +65,7 @@ in
         };
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
         repeat_rate = 50;
-        repeat_delay = 200;
+        repeat_delay = 250;
       };
       cursor = {
         no_hardware_cursors = true;
@@ -129,6 +132,7 @@ in
           "(rmpc)"
           "(PyLNP)"
           "(Waydroid)"
+          "(Emulator)"
         ])
         ++ [ "size 1000 500,class:(music)" ];
       # Keybindings
@@ -210,6 +214,13 @@ in
     };
     "hypr/conf.d/mocha.color.conf" = {
       source = ./sources/hyprland/mocha.color.conf;
+    };
+    "electron-flags.conf" = {
+      text = ''
+        --enable-features=UseOzonePlatform
+        --ozone-platform-hint=auto
+        --ozone-platform=wayland
+      '';
     };
   };
 }

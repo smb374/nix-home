@@ -21,7 +21,7 @@ in
     platformTheme.name = "qt5ct";
   };
   xdg.configFile = {
-    "Kvantum/catppuccin-mocha-lavender/catppuccin-mocha-lavender" = {
+    "Kvantum/catppuccin-mocha-lavender" = {
       source = "${catkvantum}/share/Kvantum/catppuccin-mocha-lavender";
       recursive = true;
     };

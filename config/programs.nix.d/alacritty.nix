@@ -12,6 +12,12 @@
       window = {
         opacity = 0.4;
       };
+      font = {
+        normal = {
+          family = "JetBrainsMono Nerd Font Mono";
+        };
+        size = 14;
+      };
     };
   };
 }

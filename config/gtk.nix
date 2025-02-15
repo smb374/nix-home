@@ -8,10 +8,6 @@
       package = pkgs.noto-fonts-cjk-sans;
       size = 11;
     };
-    catppuccin.icon = {
-      enable = true;
-      accent = "lavender";
-    };
     theme = {
       name = "catppuccin-mocha-lavender-standard";
       package = (

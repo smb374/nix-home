@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./config/catppuccin.nix
     ./config/file.nix
     ./config/gtk.nix
     ./config/hyprland.nix
@@ -32,6 +33,12 @@
     package = pkgs.qogir-icon-theme;
     size = 24;
   };
+  home.file.".cargo/config.toml" = {
+    text = ''
+      [target.x86_64-unknown-linux-gnu]
+      rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+    '';
+  };
 
   # Self manage.
   programs.home-manager.enable = true;
@@ -46,10 +53,12 @@
       extra-substituters = [
         "https://nix-community.cachix.org"
         "https://devenv.cachix.org"
+        "https://cache.iog.io"
       ];
       extra-trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+        "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
       ];
     };
   };
@@ -87,6 +96,10 @@
         blur-my-shell.extensionUuid
         # gsconnect.extensionUuid
       ];
+    };
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
 }

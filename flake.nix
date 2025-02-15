@@ -35,9 +35,14 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty.url = "github:ghostty-org/ghostty";
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    wallust.url = "git+https://codeberg.org/explosion-mental/wallust?ref=master";
+    omnix.url = "github:juspay/omnix";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -50,9 +55,11 @@
       catppuccin,
       devenv,
       disko,
+      ghostty,
       hyprpanel,
       neovim-nightly-overlay,
-      wallust,
+      omnix,
+      rust-overlay,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -90,13 +97,20 @@
               overlays = [
                 hyprpanel.overlay
                 neovim-nightly-overlay.overlays.default
+                rust-overlay.overlays.default
               ];
             };
             modules = [
               ags.homeManagerModules.default
               catppuccin.homeManagerModules.catppuccin
               ./home.nix
-              { home.packages = [ devenv' ]; }
+              {
+                home.packages = [
+                  devenv'
+                  ghostty.packages.${system}.default
+                  omnix.packages.${system}.default
+                ];
+              }
             ];
             extraSpecialArgs = {
               inherit system;

@@ -9,11 +9,13 @@
     ./programs.nix.d/fish.nix
     ./programs.nix.d/foot.nix
     ./programs.nix.d/gpg.nix
+    ./programs.nix.d/helix.nix
     ./programs.nix.d/lazygit.nix
     ./programs.nix.d/rofi.nix
     # ./programs.nix.d/sway.nix
     ./programs.nix.d/tmux.nix
-    ./programs.nix.d/waybar.nix
+    ./programs.nix.d/vscode.nix
+    # ./programs.nix.d/waybar.nix
   ];
   programs = {
     bun.enable = true;
@@ -32,10 +34,6 @@
       enable = true;
       enableFishIntegration = true;
       defaultCommand = "fd -t f -H -I --exclude=.git";
-      catppuccin = {
-        enable = true;
-        accent = "lavender";
-      };
     };
     git = {
       enable = true;
@@ -59,17 +57,10 @@
       enable = true;
     };
     ripgrep.enable = true;
-    sagemath = {
-      enable = true;
-      package = pkgs.sageWithDoc;
-    };
-    yazi = {
-      enable = true;
-      catppuccin = {
-        enable = true;
-        accent = "lavender";
-      };
-    };
+    # sagemath = {
+    #   enable = true;
+    # };
+    yazi.enable = true;
     zathura.enable = true;
   };
 }

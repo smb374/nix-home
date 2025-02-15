@@ -3,7 +3,6 @@
 {
   programs.fish = {
     enable = true;
-    catppuccin.enable = true;
     plugins = [
       {
         name = "hydro";

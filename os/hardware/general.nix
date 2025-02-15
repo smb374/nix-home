@@ -34,6 +34,10 @@
   boot.kernelParams = [ "boot.shell_on_fail" ];
   boot.extraModulePackages = [ ];
   boot.initrd.systemd.emergencyAccess = true;
+  boot.extraModprobeConfig = ''
+    options cfg80211 ieee80211_regdom="US"
+  '';
+  hardware.enableRedistributableFirmware = true;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

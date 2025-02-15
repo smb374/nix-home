@@ -7,15 +7,23 @@
     with pkgs;
     [
       alacritty-theme
+      # awscli2
+      bat
       brightnessctl
       brave
+      btop
       bun
       cachix
-      cargo
+      cargo-flamegraph
+      cargo-lambda
+      cargo-nextest
+      cargo-show-asm
       chromium
+      # clang
+      clang-tools
       discord
       dogdns
-      eslint
+      dua
       fastfetch
       fd
       ffmpeg-full
@@ -24,27 +32,38 @@
       gcc
       gdb
       ghidra-bin
-      gimp-with-plugins
+      ghostscript
+      gimp
       gnumake
       gnutar
       go
       gopls
       grim
       gtklock
-      helix
+      hotspot
+      hyperfine
       iaito
       imagemagick
+      iw
+      kdePackages.kcachegrind
+      kdePackages.massif-visualizer
       kdePackages.okular
       kdePackages.qt6ct
       kdePackages.qtstyleplugin-kvantum
       killall
+      leetcode-cli
+      leetgo
+      lftp
       libsForQt5.qt5ct
       libsForQt5.qtstyleplugin-kvantum
       light
+      linuxKernel.packages.linux_zen.perf
       lxqt.pavucontrol-qt
+      # lxqt.pcmanfm-qt
       man-pages
       marp-cli
       meld
+      mold
       mpc-cli
       mpv
       nil
@@ -55,20 +74,31 @@
       networkmanagerapplet
       nmon
       nodejs
+      nodePackages.aws-cdk
       nosql-workbench
-      pcmanfm
+      obsidian
+      openapi-generator-cli
+      openssl
+      # pcmanfm
+      pipx
       pfetch-rs
+      plantuml-c4
       playerctl
+      poetry
       poppler_utils
+      postman
       (python3.withPackages (pp: [
         pp.numpy
         pp.pandas
+        pp.pip
+        pp.polars
         pp.pwntools
+        pp.scipy
       ]))
       qbittorrent
       radare2
-      rustc
-      rust-analyzer
+      rust-bin.stable.latest.complete
+      unar
       ueberzugpp
       unzip
       usbutils
@@ -79,13 +109,18 @@
       sshfs
       sysstat
       themechanger
+      terraform
+      terraform-local
       tinymist
       trash-cli
       tree
       tree-sitter
       typescript-language-server
       typst
+      valgrind
       wayshot
+      wirelesstools
+      wireshark
       wl-clipboard
       x264
       x265
@@ -109,7 +144,6 @@
         # start_ueberzug
         ncmpcpp
       '')
-      inputs.wallust.packages.${pkgs.system}.wallust
     ]
     ++ [
       # Fonts

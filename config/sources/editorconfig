@@ -31,7 +31,7 @@ indent_size = 2
 indent_style = space
 indent_size = 4
 
-[*.{org,yml,yaml,json}]
+[*.{org,yml,yaml,json,tf}]
 indent_style = space
 indent_size = 2
 
