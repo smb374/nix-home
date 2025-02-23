@@ -29,7 +29,11 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
   home.pointerCursor = {
     gtk.enable = true;
-    name = "Qogir-dark";
+    hyprcursor = {
+      enable = true;
+      size = 24;
+    };
+    name = "Qogir-Dark";
     package = pkgs.qogir-icon-theme;
     size = 24;
   };

@@ -34,10 +34,12 @@
       ghidra-bin
       ghostscript
       gimp
+      globalprotect-openconnect
       gnumake
       gnutar
       go
       gopls
+      gpauth
       grim
       gtklock
       hotspot
@@ -45,6 +47,7 @@
       iaito
       imagemagick
       iw
+      jetbrains.datagrip
       kdePackages.kcachegrind
       kdePackages.massif-visualizer
       kdePackages.okular

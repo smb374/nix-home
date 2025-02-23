@@ -24,7 +24,6 @@ in
   services.hypridle.enable = true;
   services.hyprpaper.enable = true;
   home.packages = with pkgs; [
-    hyprland-protocols
     hyprland-qtutils
     hyprpanel
     hyprpicker
@@ -48,6 +47,7 @@ in
       ];
       exec-once = [
         "fcitx5"
+        "nm-applet"
         # "hyprpanel"
         "systemctl --user start hyprpolkitagent"
         "wl-paste --type text --watch cliphist store"
