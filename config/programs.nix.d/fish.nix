@@ -41,6 +41,8 @@
       set -g hydro_color_duration $fish_color_user
       # zoxide integration
       zoxide init fish | source
+      # opam integration
+      test -r "$HOME/.opam/opam-init/init.fish" && source "$HOME/.opam/opam-init/init.fish" > /dev/null 2> /dev/null; or true
 
       # functions
       # function start_ueberzeug

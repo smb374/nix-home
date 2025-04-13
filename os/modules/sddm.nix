@@ -11,7 +11,8 @@
     displayManager.sddm = {
       enable = true;
       wayland.enable = false;
-      theme = "catppuccin-sddm-corners";
+      package = pkgs.kdePackages.sddm;
+      theme = "catppuccin-mocha";
     };
   };
 }

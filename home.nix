@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [
@@ -69,27 +69,15 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
     (final: prev: {
-      matugen = final.rustPlatform.buildRustPackage rec {
-        pname = "matugen";
-        version = "2.4.0";
-
-        src = final.fetchFromGitHub {
-          owner = "InioX";
-          repo = "matugen";
-          rev = "refs/tags/v${version}";
-          hash = "sha256-l623fIVhVCU/ylbBmohAtQNbK0YrWlEny0sC/vBJ+dU=";
-        };
-
-        cargoHash = "sha256-FwQhhwlldDskDzmIOxhwRuUv8NxXCxd3ZmOwqcuWz64=";
-
-        meta = {
-          description = "Material you color generation tool";
-          homepage = "https://github.com/InioX/matugen";
-          changelog = "https://github.com/InioX/matugen/blob/${src.rev}/CHANGELOG.md";
-          license = final.lib.licenses.gpl2Only;
-          maintainers = with final.lib.maintainers; [ lampros ];
-          mainProgram = "matugen";
-        };
+      sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
+        pname = "sf-mono-liga-bin";
+        version = "dev";
+        src = inputs.sf-mono-liga-src;
+        dontConfigure = true;
+        installPhase = ''
+          mkdir -p $out/share/fonts/opentype
+          cp -R $src/*.otf $out/share/fonts/opentype/
+        '';
       };
     })
   ];
@@ -98,7 +86,8 @@
       disable-user-extensions = false;
       enabled-extensions = with pkgs.gnomeExtensions; [
         blur-my-shell.extensionUuid
-        # gsconnect.extensionUuid
+        gsconnect.extensionUuid
+        kimpanel.extensionUuid
       ];
     };
     "org/virt-manager/virt-manager/connections" = {

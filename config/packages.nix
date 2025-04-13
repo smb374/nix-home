@@ -7,8 +7,12 @@
     with pkgs;
     [
       alacritty-theme
+      alsa-utils
+      appimage-run
       # awscli2
       bat
+      beamPackages.erlang
+      beamPackages.elixir
       brightnessctl
       brave
       btop
@@ -21,19 +25,22 @@
       chromium
       # clang
       clang-tools
+      deadbeef-with-plugins
       discord
+      distant
       dogdns
       dua
       fastfetch
       fd
       ffmpeg-full
       filezilla
-      floorp
       gcc
       gdb
       ghidra-bin
       ghostscript
       gimp
+      glas
+      gleam
       globalprotect-openconnect
       gnumake
       gnutar
@@ -41,6 +48,7 @@
       gopls
       gpauth
       grim
+      gst_all_1.gstreamer
       gtklock
       hotspot
       hyperfine
@@ -59,8 +67,10 @@
       lftp
       libsForQt5.qt5ct
       libsForQt5.qtstyleplugin-kvantum
+      libuv
       light
       linuxKernel.packages.linux_zen.perf
+      lshw
       lxqt.pavucontrol-qt
       # lxqt.pcmanfm-qt
       man-pages
@@ -80,6 +90,7 @@
       nodePackages.aws-cdk
       nosql-workbench
       obsidian
+      opam
       openapi-generator-cli
       openssl
       # pcmanfm
@@ -100,11 +111,14 @@
       ]))
       qbittorrent
       radare2
+      redis
       rust-bin.stable.latest.complete
+      uget
       unar
       ueberzugpp
       unzip
       usbutils
+      raft-cowsql
       sassc
       serverless
       showmethekey
@@ -128,7 +142,6 @@
       x264
       x265
       yq-go
-      zed-editor
       zig
       zip
       zoxide
@@ -158,6 +171,7 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
+      sf-mono-liga-bin
       stix-two
     ];
 }

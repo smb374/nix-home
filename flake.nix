@@ -20,6 +20,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Other inputs
     ags = {
       url = "github:Aylur/ags";
@@ -35,12 +39,22 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty.url = "github:ghostty-org/ghostty";
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     omnix.url = "github:juspay/omnix";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sf-mono-liga-src = {
+      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
+      flake = false;
+    };
+    stylix.url = "github:danth/stylix";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      # IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
+      # to have it up to date or simply don't specify the nixpkgs input
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -50,16 +64,18 @@
       nixpkgs,
       home-manager,
       flake-parts,
+      lix-module,
       ags,
       astal,
       catppuccin,
       devenv,
       disko,
-      ghostty,
       hyprpanel,
       neovim-nightly-overlay,
       omnix,
       rust-overlay,
+      stylix,
+      zen-browser,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -80,18 +96,7 @@
         }:
         {
           formatter = pkgs.nixfmt;
-        };
-      flake =
-        let
-          system = "x86_64-linux";
-          devenv' = devenv.outputs.packages.${system}.default;
-          myLib = import ./lib {
-            inherit (nixpkgs) lib;
-            inherit disko;
-          };
-        in
-        {
-          homeConfigurations."poyehchen" = home-manager.lib.homeManagerConfiguration {
+          legacyPackages.homeConfigurations."poyehchen" = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
               inherit system;
               overlays = [
@@ -102,13 +107,14 @@
             };
             modules = [
               ags.homeManagerModules.default
-              catppuccin.homeManagerModules.catppuccin
+              catppuccin.homeModules.catppuccin
+              stylix.homeManagerModules.stylix
               ./home.nix
               {
                 home.packages = [
-                  devenv'
-                  ghostty.packages.${system}.default
+                  devenv.outputs.packages.${system}.default
                   omnix.packages.${system}.default
+                  zen-browser.packages."${system}".default
                 ];
               }
             ];
@@ -118,8 +124,20 @@
               astalPkg = astal.packages.${system};
             };
           };
+        };
+      flake =
+        let
+          myLib = import ./lib {
+            inherit (nixpkgs) lib;
+            inherit disko;
+          };
+        in
+        {
           nixosConfigurations."nix-general" = myLib.generalOs {
-            extraModules = [ ./os/modules/greetd-hyprland.nix ];
+            extraModules = [
+              stylix.nixosModules.stylix
+              ./os/modules/greetd-hyprland.nix
+            ];
           };
           nixosConfigurations."nix-qemu" = myLib.generalOs {
             device = "/dev/vda";
@@ -128,16 +146,21 @@
           };
           nixosConfigurations."smb374-nix" = myLib.generalOs {
             device = "/dev/nvme0n1";
-            extraModules = [ ./os/modules/greetd-hyprland.nix ];
+            extraModules = [
+              stylix.nixosModules.stylix
+              ./os/modules/greetd-hyprland.nix
+            ];
             bootLoader = "systemd";
           };
           nixosConfigurations."smb374-nix-desktop" = myLib.generalOs {
             device = "/dev/nvme0n1";
             extraModules = [
+              stylix.nixosModules.stylix
               ./os/hardware/bluetooth.nix
               ./os/modules/sddm.nix
               ./os/modules/nvidia.nix
               ./os/modules/hyprland.nix
+              ./os/modules/gnome.nix
             ];
             bootLoader = "grub";
             timeZone = "US/Eastern";

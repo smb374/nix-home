@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -7,9 +7,11 @@
     # ./programs.nix.d/cava.nix
     # ./programs.nix.d/firefox.nix
     ./programs.nix.d/fish.nix
+    ./programs.nix.d/floorp.nix
     ./programs.nix.d/foot.nix
     ./programs.nix.d/gpg.nix
     ./programs.nix.d/helix.nix
+    ./programs.nix.d/kitty.nix
     ./programs.nix.d/lazygit.nix
     ./programs.nix.d/rofi.nix
     # ./programs.nix.d/sway.nix
@@ -35,6 +37,18 @@
       enableFishIntegration = true;
       defaultCommand = "fd -t f -H -I --exclude=.git";
     };
+    ghostty = {
+      enable = true;
+      settings = {
+        font-family = "Maple Mono NF CN Medium";
+        font-size = 12;
+        theme = "catppuccin-mocha";
+        cursor-style = "block";
+        shell-integration-features = "no-cursor";
+        background-opacity = 0.6;
+        background-blur = true;
+      };
+    };
     git = {
       enable = true;
       delta.enable = true;
@@ -42,7 +56,7 @@
       userEmail = "poyehchen@cs.nycu.edu.tw";
       signing = {
         key = "0A507FC2325D77EA";
-        signByDefault = true;
+        signByDefault = false;
       };
     };
     imv.enable = true;
@@ -62,5 +76,9 @@
     # };
     yazi.enable = true;
     zathura.enable = true;
+    zed-editor = {
+      enable = true;
+      installRemoteServer = true;
+    };
   };
 }

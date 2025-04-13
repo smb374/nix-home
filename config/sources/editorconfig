@@ -11,7 +11,7 @@ insert_final_newline = true
 [*.go]
 indent_style = tab
 
-[*.{ex,exs}]
+[*.{ex,exs,gleam}]
 indent_style = space
 indent_size = 2
 
@@ -89,3 +89,7 @@ indent_size = 2
 
 [Info.plist]
 indent_style = tab
+
+[*.ml]
+indent_style = space
+indent_size = 2

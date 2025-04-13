@@ -82,8 +82,8 @@ in
         rounding = 5;
         blur = {
           enabled = true;
-          size = 7;
-          passes = 2;
+          size = 5;
+          passes = 3;
           new_optimizations = true;
         };
         shadow = {
@@ -134,13 +134,13 @@ in
           "(Waydroid)"
           "(Emulator)"
         ])
-        ++ [ "size 1000 500,class:(music)" ];
+        ++ [ "size 1600 800,class:(music)" ];
       # Keybindings
       "$mainMod" = "SUPER";
       bind = [
         # Main keys
-        "$mainMod, RETURN, exec, foot"
-        "$mainMod SHIFT, RETURN, exec, foot -a float-term"
+        "$mainMod, RETURN, exec, kitty"
+        "$mainMod SHIFT, RETURN, exec, kitty --app-id=float-term"
         "$mainMod SHIFT, Q, killactive"
         "$mainMod SHIFT, F, togglefloating"
         "$mainMod SHIFT, R, exec, hyprctl reload"
@@ -177,7 +177,7 @@ in
         "CTRL SHIFT, F10, pass, ^(com\.obsproject\.Studio)$"
 
         # MPD
-        "SUPER ALT, M, exec, foot -a music -o colors.alpha=1.0 start_music"
+        "SUPER ALT, M, exec, kitty --app-id=music rmpc"
         "SUPER, SPACE, exec, mpc -q toggle"
         ", XF86AudioPlay, exec, mpc -q toggle"
         ", XF86AudioPrev, exec, mpc -q prev"

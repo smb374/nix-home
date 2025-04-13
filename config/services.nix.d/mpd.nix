@@ -14,17 +14,24 @@
       fi
     '')
     pkgs.ncmpcpp
+    pkgs.rmpc
   ];
   services.mpd = {
     enable = true;
     musicDirectory = "${config.home.homeDirectory}/Music";
-    network.listenAddress = "127.0.0.1";
+    network.listenAddress = "0.0.0.0";
     extraConfig = ''
       audio_output {
-        type "pipewire"
-        name "My PipeWire Output"
-        target "alsa_output.usb-Topping_E30-00.HiFi__Headphones__sink"
-        dsd "yes"
+        type            "pipewire"
+        name            "Topping E30"
+        target          "alsa_output.usb-Topping_E30-00.HiFi__Headphones__sink"
+        dsd             "yes"
+      }
+
+      audio_output {
+        type            "pipewire"
+        name            "Pipewire Server"
+        enabled         "no"
       }
 
       decoder {
@@ -33,9 +40,14 @@
       }
 
       decoder {
-          plugin "dsf"
-          enabled "yes"
+        plugin "dsf"
+        enabled "yes"
       }
+      decoder {
+        plugin "ffmpeg"
+        enabled "yes"
+      }
+
 
       neighbors {
         plugin "udisks"

@@ -14,7 +14,7 @@
       };
       font = {
         normal = {
-          family = "JetBrainsMono Nerd Font Mono";
+          family = "Liga SFMono Nerd Font";
         };
         size = 14;
       };
