@@ -39,9 +39,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    omnix.url = "github:juspay/omnix";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -70,9 +68,7 @@
       catppuccin,
       devenv,
       disko,
-      hyprpanel,
       neovim-nightly-overlay,
-      omnix,
       rust-overlay,
       stylix,
       zen-browser,
@@ -100,7 +96,6 @@
             pkgs = import nixpkgs {
               inherit system;
               overlays = [
-                hyprpanel.overlay
                 neovim-nightly-overlay.overlays.default
                 rust-overlay.overlays.default
               ];
@@ -113,7 +108,6 @@
               {
                 home.packages = [
                   devenv.outputs.packages.${system}.default
-                  omnix.packages.${system}.default
                   zen-browser.packages."${system}".default
                 ];
               }
