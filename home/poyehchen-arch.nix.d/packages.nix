@@ -119,6 +119,7 @@ in
       "kitty"
       "lftp"
       "libuv"
+      "linux-wifi-hotspot"
       "lshw"
       "mold"
       "mpc"

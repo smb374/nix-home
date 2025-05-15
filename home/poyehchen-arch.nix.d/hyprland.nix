@@ -10,6 +10,7 @@
     "hyprland-qt-support"
     "hyprland-qtutils"
     "hyprlock"
+    "hyprpaper"
     "hyprpolkitagent"
     "hyprsunset"
     "hyprutils"
