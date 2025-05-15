@@ -25,7 +25,6 @@ in
   services.hyprpaper.enable = true;
   home.packages = with pkgs; [
     hyprland-qtutils
-    hyprpanel
     hyprpicker
     hyprpolkitagent
     hyprsunset
@@ -36,6 +35,7 @@ in
     settings = {
       monitor = [
         "DP-1,1920x1080@165.00,0x0,1"
+        "eDP-1,1920x1080@60.02,0x0,1"
       ];
       env = [
         "HYPRLAND_ROOT,${hyprland_root}"
@@ -54,8 +54,8 @@ in
         "wl-paste --type image --watch cliphist store"
       ];
       exec = [
-        # "ags quit; ags run &"
-        "hyprpanel -q; hyprpanel"
+        "ags quit; ags run &"
+        # "hyprpanel -q; hyprpanel"
       ];
       input = {
         kb_layout = "us";

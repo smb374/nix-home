@@ -112,7 +112,7 @@
       qbittorrent
       radare2
       redis
-      rust-bin.stable.latest.complete
+      # rust-bin.stable.latest.complete
       uget
       unar
       ueberzugpp
@@ -171,7 +171,6 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      sf-mono-liga-bin
       stix-two
     ];
 }

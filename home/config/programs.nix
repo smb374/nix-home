@@ -2,13 +2,13 @@
 
 {
   imports = [
-    ./programs.nix.d/alacritty.nix
+    # ./programs.nix.d/alacritty.nix
     ./programs.nix.d/ags.nix
     # ./programs.nix.d/cava.nix
     # ./programs.nix.d/firefox.nix
     ./programs.nix.d/fish.nix
-    ./programs.nix.d/floorp.nix
-    ./programs.nix.d/foot.nix
+    # ./programs.nix.d/floorp.nix
+    # ./programs.nix.d/foot.nix
     ./programs.nix.d/gpg.nix
     ./programs.nix.d/helix.nix
     ./programs.nix.d/kitty.nix
@@ -20,7 +20,6 @@
     # ./programs.nix.d/waybar.nix
   ];
   programs = {
-    bun.enable = true;
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -37,18 +36,6 @@
       enableFishIntegration = true;
       defaultCommand = "fd -t f -H -I --exclude=.git";
     };
-    ghostty = {
-      enable = true;
-      settings = {
-        font-family = "Maple Mono NF CN Medium";
-        font-size = 12;
-        theme = "catppuccin-mocha";
-        cursor-style = "block";
-        shell-integration-features = "no-cursor";
-        background-opacity = 0.6;
-        background-blur = true;
-      };
-    };
     git = {
       enable = true;
       delta.enable = true;
@@ -63,17 +50,9 @@
     java.enable = true;
     jq.enable = true;
     lf.enable = true;
-    neovim = {
-      enable = true;
-      # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-    };
-    obs-studio = {
-      enable = true;
-    };
+    neovim.enable = true;
+    obs-studio.enable = true;
     ripgrep.enable = true;
-    # sagemath = {
-    #   enable = true;
-    # };
     yazi.enable = true;
     zathura.enable = true;
     zed-editor = {

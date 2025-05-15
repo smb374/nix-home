@@ -92,30 +92,59 @@
         }:
         {
           formatter = pkgs.nixfmt;
-          legacyPackages.homeConfigurations."poyehchen" = home-manager.lib.homeManagerConfiguration {
-            pkgs = import nixpkgs {
-              inherit system;
-              overlays = [
-                neovim-nightly-overlay.overlays.default
-                rust-overlay.overlays.default
-              ];
-            };
-            modules = [
-              ags.homeManagerModules.default
-              catppuccin.homeModules.catppuccin
-              stylix.homeManagerModules.stylix
-              ./home.nix
-              {
-                home.packages = [
-                  devenv.outputs.packages.${system}.default
-                  zen-browser.packages."${system}".default
+          legacyPackages.homeConfigurations = {
+            "poyehchen" = home-manager.lib.homeManagerConfiguration {
+              pkgs = import nixpkgs {
+                inherit system;
+                overlays = [
+                  neovim-nightly-overlay.overlays.default
+                  rust-overlay.overlays.default
                 ];
-              }
-            ];
-            extraSpecialArgs = {
-              inherit system;
-              inherit inputs;
-              astalPkg = astal.packages.${system};
+              };
+              modules = [
+                ags.homeManagerModules.default
+                catppuccin.homeModules.catppuccin
+                stylix.homeManagerModules.stylix
+                ./home/poyehchen-base.nix
+                ./home/poyehchen-nix.nix
+                {
+                  home.packages = [
+                    devenv.outputs.packages.${system}.default
+                    zen-browser.packages."${system}".default
+                  ];
+                }
+              ];
+              extraSpecialArgs = {
+                inherit system;
+                inherit inputs;
+                astalPkg = astal.packages.${system};
+              };
+            };
+            "poyehchen-arch" = home-manager.lib.homeManagerConfiguration {
+              pkgs = import nixpkgs {
+                inherit system;
+                overlays = [
+                  neovim-nightly-overlay.overlays.default
+                  rust-overlay.overlays.default
+                ];
+              };
+              modules = [
+                ags.homeManagerModules.default
+                catppuccin.homeModules.catppuccin
+                stylix.homeManagerModules.stylix
+                ./home/poyehchen-base.nix
+                ./home/poyehchen-arch.nix
+                {
+                  home.packages = [
+                    devenv.outputs.packages.${system}.default
+                  ];
+                }
+              ];
+              extraSpecialArgs = {
+                inherit system;
+                inherit inputs;
+                astalPkg = astal.packages.${system};
+              };
             };
           };
         };
