@@ -196,24 +196,24 @@ in
   };
   xdg.configFile = {
     "hypr/rofi" = {
-      source = ./sources/hyprland/rofi;
+      source = ../sources/hyprland/rofi;
       recursive = true;
     };
     "hypr/scripts" = {
-      source = ./sources/hyprland/scripts;
+      source = ../sources/hyprland/scripts;
       recursive = true;
     };
     "hypr/hypridle.conf" = {
-      source = ./sources/hyprland/hypridle.conf;
+      source = ../sources/hyprland/hypridle.conf;
     };
     "hypr/hyprpaper.conf" = {
-      source = ./sources/hyprland/hyprpaper.conf;
+      source = ../sources/hyprland/hyprpaper.conf;
     };
     "hypr/hyprlock.conf" = {
-      source = ./sources/hyprland/hyprlock.conf;
+      source = ../sources/hyprland/hyprlock.conf;
     };
     "hypr/conf.d/mocha.color.conf" = {
-      source = ./sources/hyprland/mocha.color.conf;
+      source = ../sources/hyprland/mocha.color.conf;
     };
     "electron-flags.conf" = {
       text = ''

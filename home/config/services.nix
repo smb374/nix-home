@@ -15,13 +15,6 @@
       enableSshSupport = true;
       pinentryPackage = pkgs.pinentry-gnome3;
     };
-    # ollama = {
-    #   enable = true;
-    #   acceleration = "cuda";
-    #   host = "0.0.0.0";
-    # };
-    syncthing = {
-      enable = true;
-    };
+    syncthing.enable = true;
   };
 }

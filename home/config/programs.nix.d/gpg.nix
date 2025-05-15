@@ -7,7 +7,7 @@
     mutableTrust = true;
     publicKeys = [
       {
-        source = ../sources/gpg/pub-0x0A507FC2325D77EA.gpg;
+        source = ../../sources/gpg/pub-0x0A507FC2325D77EA.gpg;
         trust = "ultimate";
       }
     ];

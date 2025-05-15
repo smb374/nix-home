@@ -14,7 +14,7 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    ".editorconfig".source = ./sources/editorconfig;
+    ".editorconfig".source = ../sources/editorconfig;
     ".gdbinit-gef.py".source = pkgs.fetchurl {
       url = "https://gef.blah.cat/py";
       hash = "sha256-TBmPJ3rzsC175YdckXmGgscTUvs5fO8bFdDll+Lotmk=";
