@@ -11,10 +11,10 @@ let
       #!/bin/bash
       PACKAGES="$@"
       touch ~/.local/state/paru-state
-      echo $PACKAGES | tr " " "\\n" | sort > ~/.local/state/paru-state.new
+      echo $PACKAGES | tr " " "\n" | sort > ~/.local/state/paru-state.new
       diff -u ~/.local/state/paru-state ~/.local/state/paru-state.new > ~/.local/state/paru-state.diff
-      INSTALL=$(grep -E "^\+[a-z]+" ~/.local/state/paru-state.diff | tr -d '+' | tr '\n' ' ')
-      REMOVE=$(grep -E "^-[a-z]+" ~/.local/state/paru-state.diff | tr -d '-' | tr '\n' ' ')
+      INSTALL=$(grep -P "^\+\w+" ~/.local/state/paru-state.diff | tr -d '+' | tr '\n' ' ')
+      REMOVE=$(grep -P "^-\w+" ~/.local/state/paru-state.diff | tr -d '-' | tr '\n' ' ')
       [[ -n "$INSTALL" ]] && /sbin/sudo -u poyehchen -- paru -Sy --noconfirm --needed $INSTALL
       [[ -n "$REMOVE" ]] && /sbin/sudo -u poyehchen -- paru -Rs --noconfirm $REMOVE
       mv ~/.local/state/paru-state.new ~/.local/state/paru-state
