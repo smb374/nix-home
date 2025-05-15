@@ -11,6 +11,7 @@
     ./config/gtk.nix
     ./config/i18n.nix
     ./config/qt.nix
+    ./config/rust.nix
     ./config/services.nix
     ./config/variables.nix
     ./config/xdg.nix
@@ -23,6 +24,35 @@
     ./config/programs.nix.d/rofi.nix
     ./config/programs.nix.d/tmux.nix
   ];
+
+  programs = {
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+    eza = {
+      enable = true;
+      extraOptions = [
+        "--color=always"
+        "-h"
+      ];
+    };
+    fzf = {
+      enable = true;
+      enableFishIntegration = true;
+      defaultCommand = "fd -t f -H -I --exclude=.git";
+    };
+    git = {
+      enable = true;
+      delta.enable = true;
+      userName = "Po-Yeh Chen";
+      userEmail = "poyehchen@cs.nycu.edu.tw";
+      signing = {
+        key = "0A507FC2325D77EA";
+        signByDefault = false;
+      };
+    };
+  };
 
   dconf.settings = {
     "org/gnome/shell" = {
