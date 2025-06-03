@@ -12,6 +12,7 @@
     ./config/programs.nix
     ./config/qt.nix
     ./config/services.nix
+    ./config/services.nix.d/mpd.nix
     ./config/variables.nix
     ./config/xdg.nix
   ];

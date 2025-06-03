@@ -57,6 +57,7 @@ in
         nix-prefetch
         nix-prefetch-github
         nixfmt-rfc-style
+        numdiff
         obsidian
         pipx
         pfetch-rs
@@ -66,7 +67,6 @@ in
         showmethekey
         terraform
         terraform-local
-        tidal-hifi
         trash-cli
         typescript-language-server
       ]
@@ -74,6 +74,8 @@ in
         # Fonts
         fantasque-sans-mono
         jetbrains-mono
+        lxgw-wenkai
+        lxgw-wenkai-tc
         nerd-fonts.fantasque-sans-mono
         nerd-fonts.jetbrains-mono
         nerd-fonts.symbols-only
@@ -92,7 +94,11 @@ in
       ];
 
     arch-packages = [
+      "asdf-vm"
       "bat"
+      "blueman"
+      "boost"
+      "boost-libs"
       "btop"
       "bun-bin"
       "chromium"
@@ -109,6 +115,7 @@ in
       "ghidra"
       "ghostscript"
       "gimp"
+      "glibc-debug"
       "globalprotect-openconnect"
       "go"
       "go-yq"
@@ -150,13 +157,17 @@ in
       "python-pynvim"
       "raft"
       "ripgrep"
+      "rmpc"
       "rqbit"
+      "rustup"
       "rye"
+      "sagemath"
       "sassc"
       "slurp"
       "sshfs"
       "sysstat"
       "termshark"
+      "tidal-hifi-bin"
       "tinymist"
       "tpm2-openssl"
       "tpm2-pkcs11"

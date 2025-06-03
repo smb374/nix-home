@@ -104,7 +104,6 @@
               modules = [
                 ags.homeManagerModules.default
                 catppuccin.homeModules.catppuccin
-                stylix.homeManagerModules.stylix
                 ./home/poyehchen-base.nix
                 ./home/poyehchen-nix.nix
                 {
@@ -131,7 +130,6 @@
               modules = [
                 ags.homeManagerModules.default
                 catppuccin.homeModules.catppuccin
-                stylix.homeManagerModules.stylix
                 ./home/poyehchen-base.nix
                 ./home/poyehchen-arch.nix
                 {

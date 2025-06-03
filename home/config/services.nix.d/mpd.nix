@@ -19,6 +19,7 @@
   services.mpd = {
     enable = true;
     musicDirectory = "${config.home.homeDirectory}/Music";
+    dbFile = null;
     network.listenAddress = "0.0.0.0";
     extraConfig = ''
       audio_output {
@@ -48,6 +49,11 @@
         enabled "yes"
       }
 
+      database {
+        plugin "simple"
+        path "${config.home.homeDirectory}/.local/share/mpd/mpd.db"
+        cache_directory "${config.home.homeDirectory}/.local/share/mpd/cache"
+      }
 
       neighbors {
         plugin "udisks"

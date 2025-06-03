@@ -112,6 +112,10 @@
       qbittorrent
       radare2
       redis
+      (rust-bin.stable.latest.complete.override {
+        extensions = [ "rust-src" ];
+        targets = [ "wasm32-unknown-unknown" ];
+      })
       # rust-bin.stable.latest.complete
       uget
       unar

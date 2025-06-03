@@ -9,14 +9,14 @@
     ./config/cursor.nix
     ./config/file.nix
     ./config/gtk.nix
-    ./config/i18n.nix
+    # ./config/i18n.nix
     ./config/qt.nix
     ./config/rust.nix
     ./config/services.nix
     ./config/variables.nix
     ./config/xdg.nix
     # Shared programs
-    ./config/programs.nix.d/ags.nix
+    # ./config/programs.nix.d/ags.nix
     ./config/programs.nix.d/fish.nix
     ./config/programs.nix.d/gpg.nix
     ./config/programs.nix.d/helix.nix
@@ -55,14 +55,6 @@
   };
 
   dconf.settings = {
-    "org/gnome/shell" = {
-      disable-user-extensions = false;
-      enabled-extensions = with pkgs.gnomeExtensions; [
-        blur-my-shell.extensionUuid
-        gsconnect.extensionUuid
-        kimpanel.extensionUuid
-      ];
-    };
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];

@@ -3,7 +3,7 @@
 {
   imports = [
     # ./services.nix.d/dunst.nix
-    ./services.nix.d/mpd.nix
+    # ./services.nix.d/mpd.nix
     # ./services.nix.d/mopidy.nix
   ];
   services = {

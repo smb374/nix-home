@@ -217,8 +217,13 @@ in
     };
     "electron-flags.conf" = {
       text = ''
-        --enable-features=UseOzonePlatform
+        --enable-features=WaylandWindowDecorations
         --ozone-platform-hint=auto
+      '';
+    };
+    "electron13-flags.conf" = {
+      text = ''
+        --enable-features=UseOzonePlatform
         --ozone-platform=wayland
       '';
     };
