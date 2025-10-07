@@ -4,7 +4,7 @@
   imports = [
     # ./services.nix.d/dunst.nix
     ./services.nix.d/mpd.nix
-    # ./services.nix.d/mopidy.nix
+    ./services.nix.d/mopidy.nix
   ];
   services = {
     cliphist.enable = true;
@@ -13,13 +13,13 @@
       enableExtraSocket = true;
       enableScDaemon = true;
       enableSshSupport = true;
-      pinentryPackage = pkgs.pinentry-gnome3;
+      pinentry.package = pkgs.pinentry-gnome3;
     };
-    ollama = {
-      enable = true;
-      acceleration = "cuda";
-      host = "0.0.0.0";
-    };
+    # ollama = {
+    #   enable = false;
+    #   acceleration = "cuda";
+    #   host = "0.0.0.0";
+    # };
     syncthing = {
       enable = true;
     };

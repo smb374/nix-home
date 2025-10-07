@@ -52,6 +52,7 @@
     git = {
       enable = true;
       delta.enable = true;
+      lfs.enable = true;
       userName = "Po-Yeh Chen";
       userEmail = "poyehchen@cs.nycu.edu.tw";
       signing = {
@@ -71,9 +72,9 @@
       enable = true;
     };
     ripgrep.enable = true;
-    # sagemath = {
-    #   enable = true;
-    # };
+    sagemath = {
+      enable = true;
+    };
     yazi.enable = true;
     zathura.enable = true;
     zed-editor = {

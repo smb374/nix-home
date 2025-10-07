@@ -21,15 +21,35 @@ let
 in
 {
   programs.hyprlock.enable = true;
+  # programs.hyprpanel = {
+  #   enable = true;
+  #   settings = {
+  #     theme = {
+  #       font = {
+  #         name = "JetBrainsMono Nerd Font Propo";
+  #         size = "1rem";
+  #       };
+  #       bar = {
+  #         transparent = true;
+  #         outer_spacing = "1em";
+  #         location = "top";
+  #         layer = "bottom";
+  #         launcher.autoDetectIcon = true;
+  #       };
+  #     };
+  #   };
+  # };
   services.hypridle.enable = true;
   services.hyprpaper.enable = true;
   home.packages = with pkgs; [
-    hyprland-qtutils
     hyprpanel
+    hyprland-qtutils
     hyprpicker
     hyprpolkitagent
     hyprsunset
   ];
+  xdg.configFile."uwsm/env".source =
+    "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -48,14 +68,13 @@ in
       exec-once = [
         "fcitx5"
         "nm-applet"
-        # "hyprpanel"
+        "hyprpanel"
         "systemctl --user start hyprpolkitagent"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
       ];
       exec = [
         # "ags quit; ags run &"
-        "hyprpanel -q; hyprpanel"
       ];
       input = {
         kb_layout = "us";
@@ -64,8 +83,8 @@ in
           natural_scroll = false;
         };
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
-        repeat_rate = 50;
-        repeat_delay = 250;
+        repeat_rate = 40;
+        repeat_delay = 300;
       };
       cursor = {
         no_hardware_cursors = true;
@@ -108,9 +127,6 @@ in
       dwindle = {
         pseudotile = true;
         preserve_split = true;
-      };
-      gestures = {
-        workspace_swipe = "off";
       };
       misc = {
         mouse_move_enables_dpms = true;
@@ -186,7 +202,8 @@ in
         # screenshot
         ", PRINT, exec, $SCRIPT_ROOT/screenshot"
         "CTRL, PRINT, exec, $SCRIPT_ROOT/screenshot select"
-      ] ++ workspaceKeys;
+      ]
+      ++ workspaceKeys;
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging
         "$mainMod, mouse:272, movewindow"

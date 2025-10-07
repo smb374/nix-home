@@ -8,7 +8,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r -c Hyprland";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r -c uwsm start -- hyprland.desktop";
       };
     };
   };

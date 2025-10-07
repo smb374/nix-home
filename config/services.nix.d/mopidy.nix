@@ -1,20 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = [
-    (pkgs.writeShellScriptBin "mpd_cover_path" ''
-      file="$(mpc status -f %file% | sed -n '1p')"
-      parent="$(dirname "$HOME/Music/$file")"
-      cover="$(fd -c never -t f -i '(folder|cover)\.(jpg|jpeg|png|tif|tiff|gif)' "$parent" | sed -n '1p' | tr -d '\n')"
-
-      if [ -z "$cover" ]; then
-          echo "$HOME/placeholder.png"
-      else
-          echo "$cover"
-      fi
-    '')
-    pkgs.ncmpcpp
-  ];
+  home.packages = [ pkgs.mopidy ];
   services.mopidy = {
     enable = true;
     extensionPackages = with pkgs; [
@@ -24,6 +11,7 @@
       mopidy-mpris
       mopidy-muse
       mopidy-notify
+      mopidy-tidal
     ];
     settings = {
       audio = {
@@ -68,10 +56,14 @@
       mpd = {
         enabled = true;
         hostname = "::";
-        port = 6600;
+        port = 6601;
       };
       muse = {
         enabled = true;
+      };
+      tidal = {
+        enabled = true;
+        quality = "HI_RES_LOSSLESS";
       };
     };
   };

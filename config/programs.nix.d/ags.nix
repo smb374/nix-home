@@ -7,7 +7,6 @@
       with pkgs;
       [
         gtksourceview
-        webkitgtk
         accountsservice
         gnome-bluetooth
         libgtop

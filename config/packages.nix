@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 
 {
   # The home.packages option allows you to install Nix packages into your
@@ -22,31 +27,35 @@
       cargo-lambda
       cargo-nextest
       cargo-show-asm
+      # carla
       chromium
       # clang
-      clang-tools
+      cmake
       deadbeef-with-plugins
       discord
       distant
       dogdns
       dua
+      easyeffects
       fastfetch
       fd
       ffmpeg-full
       filezilla
-      gcc
+      (lib.meta.hiPrio gcc)
       gdb
+      gemini-cli-bin
       ghidra-bin
       ghostscript
       gimp
       glas
       gleam
-      globalprotect-openconnect
+      # globalprotect-openconnect
       gnumake
       gnutar
       go
       gopls
       gpauth
+      gpclient
       grim
       gst_all_1.gstreamer
       gtklock
@@ -55,21 +64,28 @@
       iaito
       imagemagick
       iw
-      jetbrains.datagrip
+      jalv
+      jetbrains-toolbox
       kdePackages.kcachegrind
       kdePackages.massif-visualizer
       kdePackages.okular
       kdePackages.qt6ct
       kdePackages.qtstyleplugin-kvantum
+      kid3
       killall
       leetcode-cli
       leetgo
       lftp
+      libev
+      libgcc
+      libgccjit
+      libnotify
       libsForQt5.qt5ct
       libsForQt5.qtstyleplugin-kvantum
       libuv
       light
-      linuxKernel.packages.linux_zen.perf
+      llvmPackages_20.clang-tools
+      llvmPackages_20.clang
       lshw
       lxqt.pavucontrol-qt
       # lxqt.pcmanfm-qt
@@ -80,8 +96,10 @@
       mpc-cli
       mpv
       nil
+      ninja
       nix-prefetch
       nix-prefetch-github
+      nix-tree
       nixfmt-rfc-style
       nemo
       networkmanagerapplet
@@ -90,10 +108,12 @@
       nodePackages.aws-cdk
       nosql-workbench
       obsidian
+      omnix
       opam
       openapi-generator-cli
       openssl
       # pcmanfm
+      perf
       pipx
       pfetch-rs
       plantuml-c4
@@ -110,6 +130,7 @@
         pp.scipy
       ]))
       qbittorrent
+      qjackctl
       radare2
       redis
       rust-bin.stable.latest.complete
@@ -125,9 +146,10 @@
       slurp
       sshfs
       sysstat
-      themechanger
       terraform
       terraform-local
+      themechanger
+      tidal-hifi
       tinymist
       trash-cli
       tree

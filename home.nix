@@ -67,9 +67,12 @@
     };
   };
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19"
+  ];
   nixpkgs.overlays = [
     (final: prev: {
-      sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
+      sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation {
         pname = "sf-mono-liga-bin";
         version = "dev";
         src = inputs.sf-mono-liga-src;
@@ -78,6 +81,23 @@
           mkdir -p $out/share/fonts/opentype
           cp -R $src/*.otf $out/share/fonts/opentype/
         '';
+      };
+    })
+    (final: prev: rec {
+      python3Packages = prev.python3.pkgs;
+      mopidy-tidal = python3Packages.buildPythonApplication {
+        pname = "mopidy-tidal";
+        version = "0.3.9";
+        format = "wheel";
+
+        src = prev.fetchurl {
+          url = "https://github.com/tehkillerbee/mopidy-tidal/releases/download/v0.3.9/mopidy_tidal-0.3.9-py3-none-any.whl";
+          hash = "sha256-lXrFTAZ1UDs++71mn8GyzItMIBfyaqpO031blfR+5r4=";
+        };
+        propagatedBuildInputs = [
+          prev.mopidy
+          python3Packages.tidalapi
+        ];
       };
     })
   ];

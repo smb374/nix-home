@@ -20,10 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    poetry2nix.url = "github:nix-community/poetry2nix";
     # Other inputs
     ags = {
       url = "github:Aylur/ags";
@@ -39,7 +36,8 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,7 +46,6 @@
       url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
       flake = false;
     };
-    stylix.url = "github:danth/stylix";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       # IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
@@ -62,15 +59,12 @@
       nixpkgs,
       home-manager,
       flake-parts,
-      lix-module,
       ags,
       astal,
       catppuccin,
       devenv,
       disko,
-      neovim-nightly-overlay,
       rust-overlay,
-      stylix,
       zen-browser,
       ...
     }:
@@ -96,14 +90,12 @@
             pkgs = import nixpkgs {
               inherit system;
               overlays = [
-                neovim-nightly-overlay.overlays.default
                 rust-overlay.overlays.default
               ];
             };
             modules = [
               ags.homeManagerModules.default
               catppuccin.homeModules.catppuccin
-              stylix.homeManagerModules.stylix
               ./home.nix
               {
                 home.packages = [
@@ -129,7 +121,6 @@
         {
           nixosConfigurations."nix-general" = myLib.generalOs {
             extraModules = [
-              stylix.nixosModules.stylix
               ./os/modules/greetd-hyprland.nix
             ];
           };
@@ -141,7 +132,6 @@
           nixosConfigurations."smb374-nix" = myLib.generalOs {
             device = "/dev/nvme0n1";
             extraModules = [
-              stylix.nixosModules.stylix
               ./os/modules/greetd-hyprland.nix
             ];
             bootLoader = "systemd";
@@ -149,10 +139,11 @@
           nixosConfigurations."smb374-nix-desktop" = myLib.generalOs {
             device = "/dev/nvme0n1";
             extraModules = [
-              stylix.nixosModules.stylix
               ./os/hardware/bluetooth.nix
-              ./os/modules/sddm.nix
-              ./os/modules/nvidia.nix
+              ./os/modules/greetd-hyprland.nix
+              # ./os/modules/sddm.nix
+              # ./os/modules/nvidia.nix
+              ./os/modules/amd.nix
               ./os/modules/hyprland.nix
               ./os/modules/gnome.nix
             ];

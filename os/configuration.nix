@@ -77,6 +77,7 @@
     ++ [ dmraid ];
   environment.variables = {
     MPD_HOST = "127.0.0.1";
+    GSK_RENDERER = "ngl";
   };
   services.udev.packages = with pkgs; [
     yubikey-personalization
@@ -238,6 +239,14 @@
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
+        SDL
+        SDL2
+        SDL2_image
+        SDL2_mixer
+        SDL2_ttf
+        SDL_image
+        SDL_mixer
+        SDL_ttf
         acl
         alsa-lib
         at-spi2-atk
@@ -247,40 +256,114 @@
         bzip2
         cairo
         cups
+        curlWithGnuTls
         curl
         dbus
+        dbus-glib
+        desktop-file-utils
+        e2fsprogs
         expat
+        flac
         fontconfig
+        freeglut
         freetype
+        fribidi
         fuse
         fuse3
         gdk-pixbuf
+        glew110
         glib
+        gmp
+        gst_all_1.gst-plugins-base
+        gst_all_1.gst-plugins-ugly
+        gst_all_1.gstreamer
+        gtk2
+        harfbuzz
         gtk3
         icu
+        keyutils.lib
         libGL
+        libGLU
+        libappindicator-gtk2
+        libcaca
+        libcanberra
+        libcap
+        libclang.lib
+        libdbusmenu
         libappindicator-gtk3
         libdrm
+        libgcrypt
+        libgpg-error
+        libidn
+        libjack2
+        libjpeg
+        libmikmod
+        libogg
+        libpng12
+        libgccjit
         libglvnd
         libnotify
         libpulseaudio
+        librsvg
+        libsamplerate
+        libthai
+        libtheora
+        libtiff
+        libudev0-shim
         libsodium
         libssh
         libunwind
         libusb1
         libuuid
+        libvdpau
+        libvorbis
+        libvpx
+        libxcrypt-legacy
         libxkbcommon
         libxml2
         mesa
         nspr
         nss
         openssl
+        p11-kit
         pango
+        pixman
+        python3
+        speex
         pipewire
         stdenv.cc.cc
+        tbb
+        udev
         systemd
         util-linux
         vulkan-loader
+        wayland
+        xorg.libICE
+        xorg.libSM
+        xorg.libX11
+        xorg.libXScrnSaver
+        xorg.libXcomposite
+        xorg.libXcursor
+        xorg.libXdamage
+        xorg.libXext
+        xorg.libXfixes
+        xorg.libXft
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXmu
+        xorg.libXrandr
+        xorg.libXrender
+        xorg.libXt
+        xorg.libXtst
+        xorg.libXxf86vm
+        xorg.libpciaccess
+        xorg.libxcb
+        xorg.xcbutil
+        xorg.xcbutilimage
+        xorg.xcbutilkeysyms
+        xorg.xcbutilrenderutil
+        xorg.xcbutilwm
+        xorg.xkeyboardconfig
         xz
         zlib
       ];
@@ -302,6 +385,7 @@
     ];
   };
   services = {
+    flatpak.enable = true;
     gvfs.enable = true;
     openssh.enable = true;
     # open-webui = {
@@ -316,6 +400,7 @@
         http_port = 6680;
       };
     };
+    orca.enable = false;
     pipewire = {
       enable = true;
       alsa = {
@@ -398,9 +483,17 @@
       enable = true;
       openFirewall = true;
     };
+    speechd.enable = false;
     tailscale.enable = true;
     udisks2.enable = true;
     yubikey-agent.enable = true;
+  };
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
   };
 
   virtualisation.docker = {
@@ -433,9 +526,11 @@
     };
   };
 
-  systemd.extraConfig = ''
-    DefaultTimeoutStopSec=5s
-  '';
+  systemd.settings.Manager = {
+    DefaultIOAccounting = true;
+    DefaultIPAccounting = true;
+    DefaultTimeoutStopSec = "5s";
+  };
 
   system.stateVersion = "24.05";
 }

@@ -24,7 +24,7 @@
         frame_color = "#B4BEFE";
         gap_size = 10;
         separator_color = "frame";
-        font = "JetBrains Mono 12";
+        font = "Maple Mono NF CN 12";
         line_height = 2;
         corner_radius = 6;
       };
