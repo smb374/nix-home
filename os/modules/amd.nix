@@ -8,19 +8,19 @@
   systemd = {
     packages = with pkgs; [ lact ];
     services.lactd.wantedBy = [ "multi-user.target" ];
-    tmpfiles.rules =
-      let
-        rocmEnv = pkgs.symlinkJoin {
-          name = "rocm-combined";
-          paths = with pkgs.rocmPackages; [
-            rocblas
-            hipblas
-            clr
-          ];
-        };
-      in
-      [
-        "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
-      ];
+    # tmpfiles.rules =
+    #   let
+    #     rocmEnv = pkgs.symlinkJoin {
+    #       name = "rocm-combined";
+    #       paths = with pkgs.rocmPackages; [
+    #         rocblas
+    #         hipblas
+    #         clr
+    #       ];
+    #     };
+    #   in
+    #   [
+    #     "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
+    #   ];
   };
 }

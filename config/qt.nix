@@ -18,7 +18,7 @@ in
     #   accent = "lavender";
     # };
     # style.name = "kvantum";
-    platformTheme.name = "qtct";
+    platformTheme.name = "qt6ct";
   };
   xdg.configFile = {
     "Kvantum/catppuccin-mocha-lavender" = {

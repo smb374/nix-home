@@ -2,7 +2,7 @@
 
 {
   gtk = {
-    enable = true;
+    enable = false;
     font = {
       name = "Noto Sans CJK TC";
       package = pkgs.noto-fonts-cjk-sans;

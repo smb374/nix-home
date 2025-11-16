@@ -22,29 +22,23 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     poetry2nix.url = "github:nix-community/poetry2nix";
     # Other inputs
-    ags = {
-      url = "github:Aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    astal = {
-      url = "github:Aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     catppuccin.url = "github:catppuccin/nix";
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    caelestia-cli = {
+      url = "github:caelestia-dots/cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     devenv.url = "tarball+https://install.devenv.sh/latest";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
-    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    sf-mono-liga-src = {
-      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
-      flake = false;
     };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -59,8 +53,6 @@
       nixpkgs,
       home-manager,
       flake-parts,
-      ags,
-      astal,
       catppuccin,
       devenv,
       disko,
@@ -94,8 +86,8 @@
               ];
             };
             modules = [
-              ags.homeManagerModules.default
               catppuccin.homeModules.catppuccin
+              inputs.caelestia-shell.homeManagerModules.default
               ./home.nix
               {
                 home.packages = [
@@ -107,7 +99,6 @@
             extraSpecialArgs = {
               inherit system;
               inherit inputs;
-              astalPkg = astal.packages.${system};
             };
           };
         };
@@ -145,7 +136,7 @@
               # ./os/modules/nvidia.nix
               ./os/modules/amd.nix
               ./os/modules/hyprland.nix
-              ./os/modules/gnome.nix
+              # ./os/modules/gnome.nix
             ];
             bootLoader = "grub";
             timeZone = "US/Eastern";

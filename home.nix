@@ -71,18 +71,6 @@
     "qtwebengine-5.15.19"
   ];
   nixpkgs.overlays = [
-    (final: prev: {
-      sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation {
-        pname = "sf-mono-liga-bin";
-        version = "dev";
-        src = inputs.sf-mono-liga-src;
-        dontConfigure = true;
-        installPhase = ''
-          mkdir -p $out/share/fonts/opentype
-          cp -R $src/*.otf $out/share/fonts/opentype/
-        '';
-      };
-    })
     (final: prev: rec {
       python3Packages = prev.python3.pkgs;
       mopidy-tidal = python3Packages.buildPythonApplication {
@@ -100,7 +88,26 @@
         ];
       };
     })
+    (final: prev: {
+      qt6ct-kde = prev.kdePackages.qt6ct.overrideAttrs (oA: {
+        patches =
+          (
+            let
+              oP = oA.patches or [ ];
+            in
+            if oP == null then [ ] else oP
+          )
+          ++ [
+            (prev.fetchpatch {
+              url = "https://aur.archlinux.org/cgit/aur.git/plain/qt6ct-shenanigans.patch?h=qt6ct-kde";
+              hash = "sha256-igEbJ77LmivSPMaMMY1M2sBRJPagBjrKUcU9AMxDCwg=";
+            })
+          ];
+      });
+    })
   ];
+  # nixpkgs.overlays = [
+  # ];
   dconf.settings = {
     "org/gnome/shell" = {
       disable-user-extensions = false;

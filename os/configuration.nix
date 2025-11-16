@@ -25,6 +25,9 @@
   };
   # Allow Unfree
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+
+  ];
   # nixpkgs.overlays = [
   #   (final: prev: {
   #     dmraid = prev.dmraid.overrideAttrs (oA: {
@@ -57,8 +60,10 @@
       fd
       file
       gcc
+      geoclue2-with-demo-agent
       git
       glib
+      gnome-keyring
       gnutar
       pciutils
       # qemu_full
@@ -368,7 +373,6 @@
         zlib
       ];
     };
-    uwsm.enable = true;
     virt-manager.enable = true;
   };
 

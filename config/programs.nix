@@ -3,7 +3,7 @@
 {
   imports = [
     ./programs.nix.d/alacritty.nix
-    ./programs.nix.d/ags.nix
+    # ./programs.nix.d/ags.nix
     # ./programs.nix.d/cava.nix
     # ./programs.nix.d/firefox.nix
     ./programs.nix.d/fish.nix
@@ -21,6 +21,10 @@
   ];
   programs = {
     bun.enable = true;
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+    };
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -51,10 +55,12 @@
     };
     git = {
       enable = true;
-      delta.enable = true;
+      # delta.enable = true;
       lfs.enable = true;
-      userName = "Po-Yeh Chen";
-      userEmail = "poyehchen@cs.nycu.edu.tw";
+      settings = {
+        user.name = "Po-Yeh Chen";
+        user.email = "poyehchen@cs.nycu.edu.tw";
+      };
       signing = {
         key = "0A507FC2325D77EA";
         signByDefault = false;
@@ -73,7 +79,7 @@
     };
     ripgrep.enable = true;
     sagemath = {
-      enable = true;
+      enable = false;
     };
     yazi.enable = true;
     zathura.enable = true;

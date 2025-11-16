@@ -11,9 +11,12 @@
   home.packages =
     with pkgs;
     [
+      adw-gtk3
       alacritty-theme
       alsa-utils
+      app2unit
       appimage-run
+      aubio
       # awscli2
       bat
       beamPackages.erlang
@@ -29,9 +32,13 @@
       cargo-show-asm
       # carla
       chromium
+      claude-code
       # clang
       cmake
-      deadbeef-with-plugins
+      # deadbeef-with-plugins
+      darkly
+      darkly-qt5
+      ddcutil
       discord
       distant
       dogdns
@@ -69,7 +76,7 @@
       kdePackages.kcachegrind
       kdePackages.massif-visualizer
       kdePackages.okular
-      kdePackages.qt6ct
+      # kdePackages.qt6ct
       kdePackages.qtstyleplugin-kvantum
       kid3
       killall
@@ -92,8 +99,9 @@
       man-pages
       marp-cli
       meld
+      meson
       mold
-      mpc-cli
+      mpc
       mpv
       nil
       ninja
@@ -102,7 +110,7 @@
       nix-tree
       nixfmt-rfc-style
       nemo
-      networkmanagerapplet
+      # networkmanagerapplet
       nmon
       nodejs
       nodePackages.aws-cdk
@@ -119,7 +127,7 @@
       plantuml-c4
       playerctl
       poetry
-      poppler_utils
+      poppler-utils
       postman
       (python3.withPackages (pp: [
         pp.numpy
@@ -131,6 +139,7 @@
       ]))
       qbittorrent
       qjackctl
+      qt6ct-kde
       radare2
       redis
       rust-bin.stable.latest.complete
@@ -141,10 +150,12 @@
       usbutils
       raft-cowsql
       sassc
+      scc
       serverless
       showmethekey
       slurp
       sshfs
+      swappy
       sysstat
       terraform
       terraform-local
@@ -163,9 +174,12 @@
       wl-clipboard
       x264
       x265
+      xmake
+      xfce.thunar
       yq-go
       zig
       zip
+      zls
       zoxide
     ]
     ++ [
@@ -182,18 +196,26 @@
         # start_ueberzug
         ncmpcpp
       '')
+      (pkgs.catppuccin-papirus-folders.override { accent = "lavender"; })
+      (pkgs.catppuccin-gtk.override {
+        accents = [
+          "lavender"
+        ];
+        variant = "mocha";
+      })
     ]
     ++ [
       # Fonts
       fantasque-sans-mono
       jetbrains-mono
+      material-symbols
+      nerd-fonts.caskaydia-cove
       nerd-fonts.fantasque-sans-mono
       nerd-fonts.jetbrains-mono
       nerd-fonts.symbols-only
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      sf-mono-liga-bin
       stix-two
     ];
 }

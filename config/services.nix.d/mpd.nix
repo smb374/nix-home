@@ -19,12 +19,19 @@
   services.mpd = {
     enable = true;
     musicDirectory = "${config.home.homeDirectory}/Music";
+    dbFile = null;
     network.listenAddress = "0.0.0.0";
     extraConfig = ''
+      database {
+        type "simple"
+        path "${config.home.homeDirectory}/.local/share/mpd/tag_cache"
+        cache_directory "${config.home.homeDirectory}/.local/share/mpd/cache"
+      }
+
       audio_output {
         type            "pipewire"
-        name            "Topping E30"
-        target          "alsa_output.usb-Topping_E30-00.HiFi__Headphones__sink"
+        name            "SMSL SU-1"
+        target          "alsa_output.usb-SMSL_SMSL_USB_AUDIO-00.iec958-stereo"
         dsd             "yes"
       }
 
@@ -43,18 +50,18 @@
         plugin "dsf"
         enabled "yes"
       }
+
       decoder {
         plugin "ffmpeg"
         enabled "yes"
       }
-
 
       neighbors {
         plugin "udisks"
       }
     '';
   };
-  services.mpdris2 = {
+  services.mpd-mpris = {
     enable = true;
     mpd = {
       host = "127.0.0.1";
