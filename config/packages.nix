@@ -41,7 +41,7 @@
       ddcutil
       discord
       distant
-      dogdns
+      doggo
       dua
       easyeffects
       fastfetch
@@ -108,8 +108,9 @@
       nix-prefetch
       nix-prefetch-github
       nix-tree
-      nixfmt-rfc-style
+      nixfmt
       nemo
+      neovide
       # networkmanagerapplet
       nmon
       nodejs
@@ -126,7 +127,7 @@
       pfetch-rs
       plantuml-c4
       playerctl
-      poetry
+      # poetry
       poppler-utils
       postman
       (python3.withPackages (pp: [
@@ -151,7 +152,6 @@
       raft-cowsql
       sassc
       scc
-      serverless
       showmethekey
       slurp
       sshfs
@@ -175,7 +175,7 @@
       x264
       x265
       xmake
-      xfce.thunar
+      thunar
       yq-go
       zig
       zip

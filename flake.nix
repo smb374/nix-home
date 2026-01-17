@@ -96,10 +96,20 @@
                 ];
               }
             ];
-            extraSpecialArgs = {
-              inherit system;
-              inherit inputs;
-            };
+            extraSpecialArgs =
+              let
+                caelestia-config = pkgs.fetchFromGitHub {
+                  owner = "caelestia-dots";
+                  repo = "caelestia";
+                  rev = "c07dd5b8fffd8f37e56dca4f307485a6012bdf6a";
+                  sha256 = "sha256-LHTEGMTQFROXeIZ2z9y8PAiUelH4rl/LGsoc/QjiKvk=";
+                };
+              in
+              {
+                inherit system;
+                inherit inputs;
+                inherit caelestia-config;
+              };
           };
         };
       flake =
@@ -131,12 +141,13 @@
             device = "/dev/nvme0n1";
             extraModules = [
               ./os/hardware/bluetooth.nix
-              ./os/modules/greetd-hyprland.nix
+              ./os/modules/ly.nix
+              # ./os/modules/greetd-hyprland.nix
               # ./os/modules/sddm.nix
               # ./os/modules/nvidia.nix
               ./os/modules/amd.nix
               ./os/modules/hyprland.nix
-              # ./os/modules/gnome.nix
+              ./os/modules/gnome.nix
             ];
             bootLoader = "grub";
             timeZone = "US/Eastern";

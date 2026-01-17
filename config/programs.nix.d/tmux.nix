@@ -51,6 +51,9 @@
 
       bind v split-window -v -c "#{pane_current_path}"
       bind h split-window -h -c "#{pane_current_path}"
+
+      set -g status-bg default
+      set -g status-style bg=default
     '';
   };
 }

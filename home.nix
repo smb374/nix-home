@@ -100,7 +100,7 @@
           ++ [
             (prev.fetchpatch {
               url = "https://aur.archlinux.org/cgit/aur.git/plain/qt6ct-shenanigans.patch?h=qt6ct-kde";
-              hash = "sha256-igEbJ77LmivSPMaMMY1M2sBRJPagBjrKUcU9AMxDCwg=";
+              hash = "sha256-odCe+7fPnIQtOrPqYAS15rm+wsedy6zjwnieUZSfxp0=";
             })
           ];
       });
